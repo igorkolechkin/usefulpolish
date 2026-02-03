@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdminPanel;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AdminPanel\Exercise\ExerciseStore;
 use App\Models\Exercise;
 use Illuminate\Http\Request;
 use App\Enums\Exercises\ExerciseType;
@@ -10,43 +11,32 @@ use Inertia\Inertia;
 
 class ExerciseController extends Controller
 {
-	/**
-	 * Список всех упражнений
-	 */
 	public function index()
 	{
 		$exercises = Exercise::latest()->get();
-		return Inertia::render('Admin/Exercises', compact('exercises'));
+		return Inertia::render('Admin/Exercises/Main', compact('exercises'))->with('message', 'Exercise added successfully.');
 	}
 
-	/**
-	 * Форма создания нового упражнения
-	 */
 	public function create()
 	{
-		$types = ExerciseType::cases(); // передаем enum для select
-//		return view('admin.exercises.create', compact('types'));
+		$exerciseTypes = collect(ExerciseType::cases())->map(fn ($type) => [
+			'value' => $type->value,
+			'name' => $type->text(),
+		]);
+
+		return Inertia::render('Admin/Exercises/AddNew', compact('exerciseTypes'));
 	}
 
-	/**
-	 * Сохраняем новое упражнение
-	 */
-	public function store(Request $request)
+	public function store(ExerciseStore $request)
 	{
-		$request->validate([
-			'title' => 'required|string|max:255',
-			'description' => 'nullable|string',
-			'type' => ['required', 'string', 'in:' . implode(',', array_column(ExerciseType::cases(), 'value'))],
-			'data' => 'required|array',
-			'is_active' => 'sometimes|boolean',
-		]);
+		$request->validated();
 
 		Exercise::create([
 			'title' => $request->title,
 			'description' => $request->description ?? '',
 			'type' => $request->type,
 			'data' => $request->data,
-			'is_active' => $request->is_active ?? true,
+			'is_active' => $request->is_active ?? true
 		]);
 
 		return redirect()->route('admin.exercises.index')
@@ -62,6 +52,10 @@ class ExerciseController extends Controller
 //		return view('admin.exercises.edit', compact('exercise', 'types'));
 	}
 
+	public function show(Exercise $exercise)
+	{
+		return Inertia::render('Admin/Exercises/Exercise', compact('exercise'));
+	}
 	/**
 	 * Обновляем упражнение
 	 */

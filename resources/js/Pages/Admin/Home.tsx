@@ -1,9 +1,9 @@
-import MainLayout from '@/Layouts/MainLayout'
+import AminPanelLayout from '@/Layouts/AminPanelLayout'
 
 export default function Home() {
   return (
-    <MainLayout>
-      <h1>Admin Panel</h1>
-    </MainLayout>
+    <AminPanelLayout>
+
+    </AminPanelLayout>
   )
 }

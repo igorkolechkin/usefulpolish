@@ -7,9 +7,11 @@ export default function MainLayout({ children, title }: PropsWithChildren<{ titl
   return (
     <>
       <Head title={ title } />
-      <div className="min-h-screen bg-gray-100">
+      <div className="min-h-screen flex flex-col bg-gray-100">
         <Header />
-        { children }
+        <div className="container py-6 sm:flex sm:flex-grow sm:py-12">
+          { children }
+        </div>
         <Footer />
       </div>
     </>

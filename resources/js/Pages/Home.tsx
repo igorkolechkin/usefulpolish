@@ -1,11 +1,10 @@
 import MainLayout from '@/Layouts/MainLayout'
-import SecondaryButton from '@/Components/UI/SecondaryButton'
 
 export default function Home() {
   return (
     <>
       <MainLayout title="Головна">
-        <main>
+        <main className="bg-white w-full p-4 shadow rounded-lg sm:p-6">
           Main page content
         </main>
       </MainLayout>

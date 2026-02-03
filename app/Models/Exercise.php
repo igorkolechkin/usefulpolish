@@ -10,15 +10,13 @@ use App\Enums\Exercises\ExerciseType;
 class Exercise extends Model
 {
 	protected $fillable = [ 'title', 'description', 'type', 'slug', 'data', 'is_active' ];
+	protected $hidden = [ 'created_at', 'updated_at' ];
 
 	protected $casts = [
-		'data' => 'array'
+		'data' => 'array',
+		'is_active' => 'boolean'
 	];
 
-	/**
-	 * Booted method — событие при создании модели
-	 * Автоматически генерируем уникальный slug на основе заголовка
-	 */
 	protected static function booted(): void
 	{
 		static::creating(function ($exercise) {

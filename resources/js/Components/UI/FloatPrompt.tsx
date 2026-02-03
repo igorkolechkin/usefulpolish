@@ -2,7 +2,7 @@ import clsx from 'clsx'
 
 type PropsType = {
   message: string;
-  type: 'success' | 'notice' | 'error';
+  type?: 'success' | 'notice' | 'error';
 }
 
 export default function FloatPrompt({ message, type = 'success' }: PropsType) {

@@ -14,7 +14,7 @@ class ExerciseController extends Controller
 	public function index()
 	{
 		$exercises = Exercise::latest()->get();
-		return Inertia::render('Admin/Exercises/Main', compact('exercises'))->with('message', 'Exercise added successfully.');
+		return Inertia::render('Admin/Exercises/Main', compact('exercises'));
 	}
 
 	public function create()
@@ -40,7 +40,7 @@ class ExerciseController extends Controller
 		]);
 
 		return redirect()->route('admin.exercises.index')
-			->with('success', 'Упражнение успешно создано!');
+			->with('success', 'Задання успішно створено!');
 	}
 
 	/**

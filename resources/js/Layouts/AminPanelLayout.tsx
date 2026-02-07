@@ -1,18 +1,21 @@
 import MainLayout from '@/Layouts/MainLayout'
 import NavLink from '@/Components/UI/NavLink'
-import { NavLinkType } from '@/types/ui'
+import { NavLinkType, PropsMessageType } from '@/types/ui'
 import { PropsWithChildren } from 'react'
 import FloatPrompt from '@/Components/UI/FloatPrompt'
 
+
 type PropsType = PropsWithChildren<{
   title?: string;
-  message?: string;
+  message?: PropsMessageType
 }>
 
 export default function AminPanelLayout({ children, message, title = 'Адмiн панель' }: PropsType) {
   const asideNav = [
     { name: 'Завдання', routeName: 'admin.exercises.index' }
   ]
+
+  const hasMessage = message?.text && message?.type
 
   return (
     <MainLayout title={ title }>
@@ -29,7 +32,7 @@ export default function AminPanelLayout({ children, message, title = 'Адмiн 
         </main>
       </div>
 
-      { message && <FloatPrompt message={ message } /> }
+      { hasMessage && <FloatPrompt text={ message.text } type={ message.type } /> }
     </MainLayout>
   )
 }

@@ -2,10 +2,34 @@ import AminPanelLayout from '@/Layouts/AminPanelLayout'
 import { ExerciseType } from '@/types/exercises'
 import { Link } from '@inertiajs/react'
 import PrimaryButton from '@/Components/UI/PrimaryButton'
+import { FlashType, PropsMessageType } from '@/types/ui'
 
-export default function Main({ exercises, message }: { exercises: ExerciseType[], message: string }) {
+type PropsType = {
+  exercises: ExerciseType[],
+  flash: FlashType
+}
+
+function getFlashData(data: FlashType): PropsMessageType {
+  const filtered = Object.entries(data).find(([_, v]) => v !== null)
+
+  if (!filtered) {
+    return { text: null, type: null }
+  }
+
+  const [ key ] = filtered;
+
+  const type = (['success', 'error', 'notice'] as const).includes(key as any)
+    ? (key as 'success' | 'error' | 'notice')
+    : null;
+
+  return { text: filtered[1], type }
+}
+
+export default function Main({ exercises, flash }: PropsType) {
+  const message = getFlashData(flash)
+
   return (
-    <AminPanelLayout title="Завдання" message={ message }>
+    <AminPanelLayout title="Завдання" message={ message } >
       <PrimaryButton
         as="a"
         href={ route('admin.exercises.create') }

@@ -75,17 +75,6 @@ export default function AddNew({ exerciseTypes }: { exerciseTypes: ExerciseTypes
           <InputError message={errors.description} className="mt-2" />
         </div>
 
-        <div className="col-span-2">
-          <InputLabel htmlFor="data" value="Data" />
-          <TextInput
-            id="data"
-            name="data"
-            value={ [] }
-            className="mt-1 block w-full"
-          />
-          <InputError message={errors.title} className="mt-2" />
-        </div>
-
         <div className="col-span-2 flex justify-center mt-5">
           <PrimaryButton type="submit" disabled={ processing }>
             Зберiгти

@@ -1,24 +1,91 @@
-*.log
+# OS files
 .DS_Store
+Thumbs.db
+Desktop.ini
+
+# Editor and IDE files
+/.idea/
+/.vscode/
+/.fleet/
+/.nova/
+/.zed/
+*.swp
+*.swo
+
+# Environment files
 .env
-.env.backup
-.env.production
-.phpactor.json
-.phpunit.result.cache
-/.fleet
-/.idea
-/.nova
-/.phpunit.cache
-/.vscode
-/.zed
+.env.*
+!.env.example
+!.env.testing.example
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# PHP / Laravel
+/vendor/
 /auth.json
-/node_modules
-/public/build
-/public/hot
-/public/storage
-/storage/*.key
-/storage/pail
-/vendor
+/.phpunit.cache/
+.phpunit.result.cache
+.phpactor.json
 Homestead.json
 Homestead.yaml
-Thumbs.db
+
+# Laravel runtime files
+/bootstrap/cache/*.php
+/storage/*.key
+/storage/app/*
+!/storage/app/.gitignore
+/storage/framework/cache/*
+!/storage/framework/cache/.gitignore
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitignore
+/storage/framework/testing/*
+!/storage/framework/testing/.gitignore
+/storage/framework/views/*
+!/storage/framework/views/.gitignore
+/storage/logs/*
+!/storage/logs/.gitignore
+/storage/pail/
+
+# Public generated files
+/public/build/
+/public/hot
+/public/storage/
+
+# Node / React / Vite
+/node_modules/
+/dist/
+/.vite/
+.vite/
+vite.config.*.timestamp-*
+vite.config.*.mjs
+
+# Test and coverage output
+/coverage/
+/.nyc_output/
+
+# Package manager caches
+.npm/
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+.pnpm-store/
+
+# Build and cache directories
+/.cache/
+/.parcel-cache/
+/.turbo/
+/.next/
+/.nuxt/
+
+# Local certificates and keys
+*.pem
+*.key
+*.crt

@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "command": "/Applications/MAMP/bin/php/php8.5.2/bin/php",
+            "args": [
+                "/Users/igorkoleckin/Sites/usefulpolish.com/usefulpolish/artisan",
+                "boost:mcp"
+            ]
+        }
+    }
+}

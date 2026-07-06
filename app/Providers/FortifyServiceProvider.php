@@ -71,7 +71,6 @@ class FortifyServiceProvider extends ServiceProvider
             'passwordRules' => Password::defaults()->toPasswordRulesString(),
         ]));
 
-        Fortify::confirmPasswordView(fn () => Inertia::render('auth/confirm-password'));
     }
 
     /**
@@ -79,10 +78,12 @@ class FortifyServiceProvider extends ServiceProvider
      */
     private function configureRateLimiting(): void
     {
+
         RateLimiter::for('login', function (Request $request) {
             $throttleKey = Str::transliterate(Str::lower($request->input(Fortify::username())).'|'.$request->ip());
 
             return Limit::perMinute(5)->by($throttleKey);
         });
+
     }
 }

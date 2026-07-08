@@ -5,6 +5,12 @@
 
 The Laravel Boost guidelines are specifically curated by Laravel maintainers for this application. These guidelines should be followed closely to ensure the best experience when building Laravel applications.
 
+## Formatting
+
+- Do not run `pint`, `composer fix`, `npm run format`, or `npm run lint` automatically.
+- The user runs `composer fix` manually before commits.
+- Do not ask whether to run formatting unless the user explicitly requests verification or formatting.
+
 ## Foundational Context
 
 This application is a Laravel application and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
@@ -185,8 +191,8 @@ Use Wayfinder to generate TypeScript functions for Laravel routes. Import from `
 
 # Laravel Pint Code Formatter
 
-- If you have modified any PHP files, you must run `vendor/bin/pint --dirty --format agent` before finalizing changes to ensure your code matches the project's expected style.
-- Do not run `vendor/bin/pint --test --format agent`, simply run `vendor/bin/pint --format agent` to fix any formatting issues.
+- Do not run Pint automatically after code changes.
+- The user runs `composer fix` manually before commits.
 
 === pest/core rules ===
 

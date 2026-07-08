@@ -54,6 +54,11 @@
         "lint": [
             "pint --parallel"
         ],
+        "fix": [
+            "pint --parallel",
+            "npm run format",
+            "npm run lint"
+        ],
         "lint:check": [
             "pint --parallel --test"
         ],

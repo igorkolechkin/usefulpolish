@@ -4,7 +4,7 @@ import { login, register } from '@/routes';
 
 export default function PublicLayout({ children }: PropsWithChildren) {
     return (
-        <div className="min-h-screen bg-background text-foreground">
+        <div className="min-h-screen bg-background text-background-1">
             <header className="border-b border-border">
                 <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
                     <Link href="/" className="font-semibold">

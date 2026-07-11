@@ -10,24 +10,20 @@
         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
 
+    --color-primary: var(--primary);
+    --color-primary-hover: var(--primary-hover);
+    --color-secondary: var(--secondary);
+    --color-accent: var(--accent);
+    --color-accent-hover: var(--accent-hover);
+    --color-muted: var(--muted);
+    --color-muted-hover: var(--muted-hover);
+    --color-destructive: var(--destructive);
+    --color-destructive-hover: var(--destructive-hover);
+    --color-slate: var(--slate);
+    
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
     --radius-sm: calc(var(--radius) - 4px);
-
-    --color-primary: var(--primary);
-    --color-primary-foreground: var(--primary-foreground);
-
-    --color-secondary: var(--secondary);
-    --color-secondary-foreground: var(--secondary-foreground);
-
-    --color-muted: var(--muted);
-    --color-muted-foreground: var(--muted-foreground);
-
-    --color-accent: var(--accent);
-    --color-accent-foreground: var(--accent-foreground);
-
-    --color-destructive: var(--destructive);
-    --color-destructive-foreground: var(--destructive-foreground);
 
     --color-border: var(--border);
     --color-input: var(--input);
@@ -36,21 +32,71 @@
 }
 
 :root {
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(0.577 0.245 27.325);
-    --destructive-foreground: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
+    --primary: #435ebe;
+    --primary-hover: #3950a2;
+    --secondary: #25396f;
+    --accent: #dab955;
+    --accent-hover: #C9A544;
+    --muted: #f9f9f9;
+    --muted-hover: #dcecec;
+    --destructive: #dc3545;
+    --destructive-hover: #bb2d3b;
+
+    --slate: #607080;
+    --white: #ffffff;
+
+    --border: #dce7f1;
     --input: oklch(0.922 0 0);
-    --radius: 0.625rem;
+    --radius: 0.5rem;
 }
 
 @layer base {
-    
+    html {
+        font-size: 18px;
+    }
+
+    body {
+        color: var(--slate);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: var(--secondary);
+        font-weight: 700;
+        line-height: 1.2;
+    }
+
+    h1 {
+        font-size: 3rem;
+    }
+
+    h2 {
+        font-size: 2.1rem;
+    }
+
+    h3 {
+        font-size: 1.8rem;
+    }
+
+    h4 {
+        font-size: 1.25rem;
+    }
+
+    h5 {
+        font-size: 1.125rem;
+    }
+
+    h6 {
+        font-size: 1rem;
+    }
+
+    @media (max-width: 768px) {
+        html {
+            font-size: 16px;
+        }
+    }
 }

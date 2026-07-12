@@ -2,6 +2,7 @@
     "semi": false,
     "bracketSpacing": true,
     "singleQuote": true,
+    "arrowParens": "avoid",
     "singleAttributePerLine": false,
     "htmlWhitespaceSensitivity": "css",
     "printWidth": 100,

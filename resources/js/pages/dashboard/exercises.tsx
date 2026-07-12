@@ -1,19 +1,8 @@
 import { Link } from '@inertiajs/react'
 import { show } from '@/routes/dashboard/exercises'
+import { ExercisesList } from '@/types/exercises'
 
-type Exercise = {
-    id: number
-    title: string
-    slug: string
-    is_active: boolean
-    tags: {
-        id: number
-        title: string
-        slug: string
-    }[]
-}
-
-export default function Exercises({ exercises }: { exercises: Exercise[] }) {
+export default function Exercises({ exercises }: { exercises: ExercisesList }) {
     return (
         <div>
             {exercises.length > 0 && (

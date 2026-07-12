@@ -6,7 +6,6 @@ import { store } from '@/routes/login'
 import { request as passwordRequest } from '@/routes/password'
 
 export default function LoginForm({ status }: { status?: string }) {
-    status = 'adasdasd'
     const [isShowStatus, setIsShowStatus] = useState(true)
 
     useEffect(() => {

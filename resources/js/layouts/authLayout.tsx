@@ -11,6 +11,7 @@ export default function AuthLayout({ children, title, subtitle }: Props) {
     return (
         <>
             <Head title={title} />
+
             <div className="flex min-h-screen flex-col items-center justify-center bg-muted px-4 py-12">
                 <div className="mb-8">
                     <Logo />

@@ -1,4 +1,5 @@
 import Aside from '@/components/dashboard/aside'
+import { Head } from '@inertiajs/react'
 
 export default function DashboardLayout({
     children,
@@ -8,13 +9,17 @@ export default function DashboardLayout({
     title: string
 }) {
     return (
-        <div className="min-h-screen bg-[#f2f7ff]">
-            <Aside />
+        <>
+            <Head title={title} />
+            
+            <div className="min-h-screen bg-[#f2f7ff]">
+                <Aside />
 
-            <div className="ml-[300px] p-8">
-                <p className='font-lg mb-5'>{title}</p>
-                <main className="grow-1">{children}</main>
+                <div className="ml-[300px] p-8">
+                    <p className="text-4xl mb-5">{title}</p>
+                    <main className="grow-1">{children}</main>
+                </div>
             </div>
-        </div>
+        </>
     )
 }

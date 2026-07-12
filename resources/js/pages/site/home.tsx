@@ -1,12 +1,7 @@
-import { Head, usePage } from '@inertiajs/react';
+import { Head, usePage } from '@inertiajs/react'
 
-export default function Welcome() {
-    const { auth } = usePage().props;
+export default function Home() {
+    const { auth } = usePage().props
 
-    return (
-        <>
-            <Head title="Home page" />
-            Home page
-        </>
-    );
+    return <>Home page</>
 }

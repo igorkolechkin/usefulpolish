@@ -1,9 +1,7 @@
-import { Head } from '@inertiajs/react'
-
 export default function Exercises() {
     return (
         <>
-            <Head title="Вправи" />
+            Вправи
         </>
     )
 }

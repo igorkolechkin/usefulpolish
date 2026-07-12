@@ -15,8 +15,8 @@ export default function DashboardLayout({
             <div className="min-h-screen bg-[#f2f7ff]">
                 <Aside />
 
-                <div className="ml-[300px] p-8">
-                    <p className="text-4xl mb-5">{title}</p>
+                <div className="mx-[300px] p-8">
+                    <p className="text-4xl text-secondary font-semibold mb-10">{title}</p>
                     <main className="grow-1">{children}</main>
                 </div>
             </div>

@@ -20,7 +20,14 @@ export default function Aside() {
     return (
         <aside className="fixed top-0 left-0 h-full w-[300px] overflow-auto bg-white p-8">
             <nav>
-                <ul className="flex flex-col gap-5">
+                <ul className="flex flex-col gap-3">
+                    <Link
+                        href="/"
+                        className="block rounded-md px-4 py-2 font-semibold transition-colors text-secondary mb-5"
+                    >
+                        Useful Polish
+                    </Link>
+
                     {navItems.map((item) => (
                         <li key={item.title}>
                             <Link

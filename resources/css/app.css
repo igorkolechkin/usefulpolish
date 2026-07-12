@@ -100,3 +100,9 @@
         }
     }
 }
+
+@layer utilities {
+    [disabled] {
+        cursor: default;
+    }
+}

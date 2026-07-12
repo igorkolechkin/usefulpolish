@@ -1,39 +1,61 @@
-// Components
-import { Form, Head } from '@inertiajs/react';
-import { LoaderCircle } from 'lucide-react';
-import { login } from '@/routes';
-import { email } from '@/routes/password';
+import { Form, Link } from '@inertiajs/react'
+import { useEffect, useState } from 'react'
+import Input from '@/components/formElements/input'
+import SubmitButton from '@/components/formElements/submitButton'
+import { login } from '@/routes'
+import { email as passwordEmail } from '@/routes/password'
 
 export default function ForgotPassword({ status }: { status?: string }) {
-    return (
-        <>
-            <Head title="Forgot password" />
+    const [isShowStatus, setIsShowStatus] = useState(true)
 
-            {status && (
-                <div className="mb-4 text-center text-sm font-medium text-green-600">
+    useEffect(() => {
+        if (!status) {
+            return
+        }
+
+        const timeoutId = window.setTimeout(() => setIsShowStatus(false), 10000)
+
+        return () => window.clearTimeout(timeoutId)
+    }, [status])
+
+    return (
+        <div className="space-y-6">
+            {status && isShowStatus && (
+                <div className="rounded-md bg-muted p-4 text-center text-sm font-semibold text-primary">
                     {status}
                 </div>
             )}
 
-            <div className="space-y-6">
-                <Form {...email.form()}>
-                    {({ processing, errors }) => (
-                        <>
-                            Forgot password
-                        </>
-                    )}
-                </Form>
+            <Form {...passwordEmail.form()} className="space-y-4">
+                {({ processing, errors }) => (
+                    <>
+                        <Input
+                            label="Email"
+                            name="email"
+                            type="email"
+                            autoComplete="email"
+                            error={errors.email}
+                        />
 
-                <div className="space-x-1 text-center text-sm text-muted-foreground">
-                    <span>Or, return to</span>
-                    <TextLink href={login()}>log in</TextLink>
-                </div>
-            </div>
-        </>
-    );
+                        <SubmitButton
+                            text={processing ? 'Відправляємо...' : 'Відправити посилання'}
+                            disabled={processing}
+                        />
+                    </>
+                )}
+            </Form>
+
+            <Link
+                href={login()}
+                className="block text-center text-sm font-semibold text-primary hover:text-primary-hover"
+            >
+                Повернутися до входу
+            </Link>
+        </div>
+    )
 }
 
 ForgotPassword.layout = {
-    title: 'Forgot password',
-    description: 'Enter your email to receive a password reset link',
-};
+    title: 'Відновлення пароля',
+    subtitle: 'Вкажіть email, і ми надішлемо посилання для створення нового пароля',
+}

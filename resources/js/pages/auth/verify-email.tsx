@@ -2,6 +2,7 @@ import { Form } from '@inertiajs/react'
 import { useEffect, useState } from 'react'
 import { logout } from '@/routes'
 import { send } from '@/routes/verification'
+import SubmitButton from '@/components/formElements/submitButton'
 
 export default function VerifyEmail({ status }: { status?: string }) {
     const [isShowStatus, setIsShowStatus] = useState(true)
@@ -32,25 +33,19 @@ export default function VerifyEmail({ status }: { status?: string }) {
 
                 <Form {...send.form()}>
                     {({ processing }) => (
-                        <button
-                            type="submit"
+                        <SubmitButton
+                            text={processing ? 'Відправляємо...' : 'Відправити лист ще раз'}
                             disabled={processing}
-                            className="w-full cursor-pointer rounded-md bg-primary px-4 py-3 font-semibold text-white transition hover:bg-primary-hover disabled:opacity-60"
-                        >
-                            {processing ? 'Відправляємо...' : 'Відправити лист ще раз'}
-                        </button>
+                        />
                     )}
                 </Form>
 
                 <Form {...logout.form()}>
                     {({ processing }) => (
-                        <button
-                            type="submit"
+                        <SubmitButton
+                            text="Вийти з акаунта"
                             disabled={processing}
-                            className="cursor-pointer text-sm font-semibold text-primary transition hover:text-primary-hover disabled:opacity-60"
-                        >
-                            Вийти з акаунта
-                        </button>
+                        />
                     )}
                 </Form>
             </div>

@@ -5,7 +5,7 @@ import SiteLayout from '@/layouts/siteLayout';
 import DashboardLayout from '@/layouts/dashboardLayout';
 import AuthLayout from '@/layouts/authLayout';
 
-const appName = import.meta.env.VITE_APP_NAME || 'UsefulPolish';
+const appName = 'Useful Polish';
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),

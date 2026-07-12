@@ -1,26 +1,16 @@
-import { Link, useForm } from '@inertiajs/react'
-import { useEffect, useState, type FormEvent } from 'react'
-import Input from '@/components/ui/formElements/input'
+import { Form, Link } from '@inertiajs/react'
+import { useEffect, useState } from 'react'
+import Input from '@/components/formElements/input'
+import SubmitButton from '@/components/formElements/submitButton'
 import { store } from '@/routes/login'
 import { request as passwordRequest } from '@/routes/password'
 
 export default function LoginForm({ status }: { status?: string }) {
-    const { data, setData, post, processing, errors } = useForm({
-        email: '',
-        password: '',
-        remember: false,
-    })
+    status = 'adasdasd'
     const [isShowStatus, setIsShowStatus] = useState(true)
-    
-        
-    const submit = (e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        
-        post(store.url())
-    }
-        
+
     useEffect(() => {
-        if (status !== 'verification-link-sent') {
+        if (!status) {
             return
         }
 
@@ -30,59 +20,52 @@ export default function LoginForm({ status }: { status?: string }) {
     }, [status])
 
     return (
-        <form onSubmit={submit} className="space-y-4">
-            {status && isShowStatus && (
-                <div className="rounded-md bg-muted p-4 text-center text-sm font-semibold text-primary">
-                    {status}
-                </div>
+        <Form {...store.form()} resetOnSuccess={['password']} className="space-y-4">
+            {({ processing, errors }) => (
+                <>
+                    {status && isShowStatus && (
+                        <div className="rounded-md bg-muted p-4 text-center text-sm font-semibold text-primary">
+                            {status}
+                        </div>
+                    )}
+
+                    <Input
+                        label="Email"
+                        name="email"
+                        type="email"
+                        autoComplete="email"
+                        error={errors.email}
+                    />
+
+                    <Input
+                        label="Пароль"
+                        name="password"
+                        type="password"
+                        autoComplete="current-password"
+                        error={errors.password}
+                    />
+
+                    <label className="flex items-center gap-2 text-sm">
+                        <input
+                            type="checkbox"
+                            name="remember"
+                            value="1"
+                            className="size-4 rounded border-border"
+                        />
+                        Запамʼятати мене
+                    </label>
+
+                    <SubmitButton text="Увійти" disabled={processing} />
+
+                    <Link
+                        href={passwordRequest()}
+                        className="block cursor-pointer text-center text-sm font-semibold text-primary hover:text-primary-hover disabled:opacity-60"
+                    >
+                        Забули пароль?
+                    </Link>
+                </>
             )}
-
-            <Input
-                label="Email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                value={data.email}
-                onChange={e => setData('email', e.target.value)}
-                error={errors.email}
-            />
-
-            <Input
-                label="Пароль"
-                name="password"
-                type="password"
-                autoComplete="current-password"
-                value={data.password}
-                onChange={e => setData('password', e.target.value)}
-                error={errors.password}
-            />
-
-            <label className="flex items-center gap-2 text-sm">
-                <input
-                    type="checkbox"
-                    name="remember"
-                    checked={data.remember}
-                    onChange={e => setData('remember', e.target.checked)}
-                    className="size-4 rounded border-border"
-                />
-                Запамʼятати мене
-            </label>
-
-            <button
-                type="submit"
-                disabled={processing}
-                className="w-full rounded-md bg-primary px-4 py-3 font-semibold text-white transition hover:bg-primary-hover disabled:opacity-60"
-            >
-                Увійти
-            </button>
-
-            <Link
-                href={passwordRequest()}
-                className="block cursor-pointer text-center text-sm font-semibold text-primary hover:text-primary-hover disabled:opacity-60"
-            >
-                Забули пароль?
-            </Link>
-        </form>
+        </Form>
     )
 }
 

@@ -1,11 +1,12 @@
-import { cn } from '@/lib/utils'
 import type { ChangeEventHandler } from 'react'
+import { cn } from '@/lib/utils'
 
 type Props = {
     label: string
     name: string
     type: string
     autoComplete?: string
+    defaultValue?: string
     error?: string
     value?: string
     onChange?: ChangeEventHandler<HTMLInputElement>
@@ -16,20 +17,25 @@ export default function Input({
     name,
     type,
     autoComplete,
+    defaultValue,
     error,
     value,
     onChange,
 }: Props) {
+    const valueProps =
+        value === undefined
+            ? { defaultValue }
+            : { onChange, value }
+
     return (
         <label className="block">
             <div className="relative">
                 <input
                     name={name}
                     type={type}
-                    value={value}
-                    onChange={onChange}
                     placeholder=" "
                     autoComplete={autoComplete}
+                    {...valueProps}
                     className={cn(
                         'peer w-full rounded-md border border-input bg-white px-4 pt-6 pb-2 outline-none transition focus:border-primary focus:ring-3 focus:ring-primary/15',
                         error && 'border-destructive focus:border-destructive',

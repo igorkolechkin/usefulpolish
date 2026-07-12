@@ -11,11 +11,11 @@ const navItems = [
     {
         title: 'Вправи',
         href: exercises(),
-    }
+    },
 ]
 
 export default function Aside() {
-    const { isCurrentUrl } = useCurrentUrl()
+    const { isCurrentOrParentUrl } = useCurrentUrl()
 
     return (
         <aside className="fixed top-0 left-0 h-full w-[300px] overflow-auto bg-white p-8">
@@ -23,19 +23,19 @@ export default function Aside() {
                 <ul className="flex flex-col gap-3">
                     <Link
                         href="/"
-                        className="block rounded-md px-4 py-2 font-semibold transition-colors text-secondary mb-5"
+                        className="mb-5 block rounded-md px-4 py-2 font-semibold text-secondary transition-colors"
                     >
                         Useful Polish
                     </Link>
 
-                    {navItems.map((item) => (
+                    {navItems.map(item => (
                         <li key={item.title}>
                             <Link
                                 href={item.href}
                                 className={cn(
                                     'block rounded-md px-4 py-2 font-semibold transition-colors',
-									!isCurrentUrl(item.href) && 'text-secondary hover:bg-muted',
-                                    isCurrentUrl(item.href) && 'text-white bg-primary',
+                                    !isCurrentOrParentUrl(item.href) && 'text-secondary hover:bg-muted',
+                                    isCurrentOrParentUrl(item.href) && 'bg-primary text-white',
                                 )}
                             >
                                 {item.title}

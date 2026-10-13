@@ -21,7 +21,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
     return (
         <div className="space-y-6">
             {status && isShowStatus && (
-                <div className="rounded-md bg-muted p-4 text-center text-sm font-semibold text-primary">
+                <div className="rounded-md bg-muted p-4 text-center text-sm font-medium text-primary">
                     {status}
                 </div>
             )}
@@ -47,7 +47,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
 
             <Link
                 href={login()}
-                className="block text-center text-sm font-semibold text-primary hover:text-primary-hover"
+                className="block text-center text-sm font-medium text-primary hover:text-primary-hover"
             >
                 Повернутися до входу
             </Link>

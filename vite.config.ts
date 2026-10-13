@@ -20,7 +20,7 @@ export default defineConfig({
             refresh: true,
             fonts: [
                 bunny('Nunito', {
-                    weights: [400, 500, 600],
+                    weights: [400, 500, 700],
                 }),
             ],
         }),

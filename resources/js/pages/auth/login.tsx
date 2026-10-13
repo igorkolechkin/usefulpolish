@@ -23,7 +23,7 @@ export default function LoginForm({ status }: { status?: string }) {
             {({ processing, errors }) => (
                 <>
                     {status && isShowStatus && (
-                        <div className="rounded-md bg-muted p-4 text-center text-sm font-semibold text-primary">
+                        <div className="rounded-md bg-muted p-4 text-center text-sm font-medium text-primary">
                             {status}
                         </div>
                     )}
@@ -58,7 +58,7 @@ export default function LoginForm({ status }: { status?: string }) {
 
                     <Link
                         href={passwordRequest()}
-                        className="block cursor-pointer text-center text-sm font-semibold text-primary hover:text-primary-hover disabled:opacity-60"
+                        className="block cursor-pointer text-center text-sm font-medium text-primary hover:text-primary-hover disabled:opacity-60"
                     >
                         Забули пароль?
                     </Link>

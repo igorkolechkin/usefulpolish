@@ -20,7 +20,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
     return (
         <>
             {status === 'verification-link-sent' && isShowStatus && (
-                <div className="mb-4 rounded-md bg-muted p-4 text-center text-sm font-semibold text-primary">
+                <div className="mb-4 rounded-md bg-muted p-4 text-center text-sm font-medium text-primary">
                     Новий лист для підтвердження email відправлено.
                 </div>
             )}

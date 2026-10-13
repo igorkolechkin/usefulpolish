@@ -20,6 +20,18 @@
     --color-destructive: var(--destructive);
     --color-destructive-hover: var(--destructive-hover);
     --color-slate: var(--slate);
+    --color-brand: #c92343;
+    --color-brand-hover: #ac1936;
+    --color-brand-soft: #fff1f3;
+    --color-canvas: #f7f8fc;
+    --color-ink: #26334d;
+    --color-quiet: #596579;
+    --color-blue-soft: #eef2fb;
+    --color-control-border: #7c889b;
+    --color-success: #23734b;
+    --color-success-soft: #edf9f1;
+    --color-error: #b42336;
+    --color-error-soft: #fff1f3;
     
     --radius-lg: var(--radius);
     --radius-md: calc(var(--radius) - 2px);
@@ -51,8 +63,12 @@
 }
 
 @layer base {
+    :where(a[href], button, summary, select, input[type='button'], input[type='submit'], input[type='reset'], input[type='checkbox'], input[type='radio'], input[type='file'], [role='button'], [role='link'], [role='tab'], [role='menuitem'], [role='checkbox'], [role='radio'], [role='switch']) {
+        cursor: pointer;
+    }
+
     html {
-        font-size: 18px;
+        font-size: 16px;
     }
 
     body {
@@ -96,13 +112,25 @@
 
     @media (max-width: 768px) {
         html {
-            font-size: 16px;
+            font-size: 15px;
+        }
+
+        :where(button, [role='button']) {
+            min-width: 44px;
+            min-height: 44px;
         }
     }
 }
 
 @layer utilities {
-    [disabled] {
+    @media (max-width: 768px) {
+        :is(button, [role='button']):is(.min-h-12, .size-11, .size-12) {
+            min-height: 44px;
+        }
+    }
+
+    :disabled,
+    [aria-disabled='true'] {
         cursor: default;
     }
 }

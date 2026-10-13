@@ -29,4 +29,4 @@ export type ExercisesList = {
         title: string
         slug: string
     }[]
-}
+}[]

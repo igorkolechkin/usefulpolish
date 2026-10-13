@@ -43,9 +43,9 @@ export default function Input({
                 />
                 <span
                     className={cn(
-                        'pointer-events-none absolute top-2 left-4 text-xs font-semibold text-slate transition-all',
+                        'pointer-events-none absolute top-2 left-4 text-xs font-medium text-slate transition-all',
                         'peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-base peer-placeholder-shown:font-normal',
-                        'peer-focus:top-2 peer-focus:text-xs peer-focus:font-semibold peer-focus:text-primary',
+                        'peer-focus:top-2 peer-focus:text-xs peer-focus:font-medium peer-focus:text-primary',
                         error && 'text-destructive peer-focus:text-destructive',
                     )}
                 >

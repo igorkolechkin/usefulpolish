@@ -1,3 +1,9 @@
+# Project design
+
+- Before changing the visual design of pages or components, read [design.md](design.md) and follow its typography, color, spacing, interaction, and accessibility rules.
+- Apply these rules to the student-facing website. Restyling the Filament administration panel requires a separate request.
+- Keep design.md up to date when the user changes design preferences. Distinguish explicit user preferences from proposed defaults.
+
 <laravel-boost-guidelines>
 === foundation rules ===
 

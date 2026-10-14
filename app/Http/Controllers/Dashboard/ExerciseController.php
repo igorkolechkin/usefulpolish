@@ -13,6 +13,7 @@ class ExerciseController extends Controller
     {
         return Inertia::render('dashboard/exercises', [
             'exercises' => Exercise::query()
+                ->where('is_active', true)
                 ->select(['id', 'title', 'slug', 'is_active'])
                 ->with('tags:id,title,slug')
                 ->latest()
@@ -22,6 +23,8 @@ class ExerciseController extends Controller
 
     public function show(Exercise $exercise): Response
     {
+        abort_unless($exercise->is_active, 404);
+
         return Inertia::render('dashboard/exercise', [
             'exercise' => [
                 'title' => $exercise->title,

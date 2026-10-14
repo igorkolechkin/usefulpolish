@@ -3,6 +3,7 @@
 - Before changing the visual design of pages or components, read [design.md](design.md) and follow its typography, color, spacing, interaction, and accessibility rules.
 - Apply these rules to the student-facing website. Restyling the Filament administration panel requires a separate request.
 - Keep design.md up to date when the user changes design preferences. Distinguish explicit user preferences from proposed defaults.
+- Screen-reader-specific markup and behavior may be added on public pages such as `/` and `/news`. In the personal account, student dashboard, and administration panel, do not add it unless explicitly requested: this includes ARIA labels and live regions, screen-reader-only text, skip links, and IDs used solely for accessibility relationships. Keep ordinary semantic HTML and native control behavior. This exception takes precedence over general screen-reader guidance in design.md. Do not remove existing markup or library-provided behavior without a separate request.
 
 <laravel-boost-guidelines>
 === foundation rules ===
@@ -129,10 +130,12 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 
 === tests rules ===
 
-# Test Enforcement
+# Verification scope
 
-- Every change must be programmatically tested. Write a new test or update an existing test, then run the affected tests to make sure they pass.
-- Run the minimum number of tests needed to ensure code quality and speed. Use `php artisan test --compact` with a specific filename or filter.
+- Explicit user preference (14 October 2026): conserve tokens and verification time. By default, review the changed code and use TypeScript checks (`npm run types:check`) and the build (`npm run build`) when relevant. Documentation-only changes do not need these commands.
+- Do not create, update, or run browser tests (including Playwright), server-side tests (including Pest/PHPUnit), or other automated test suites unless the user explicitly requests them. Previous permission to use Playwright does not authorize routine browser testing.
+- This preference takes precedence over any general testing requirements in project skills or other sections of this file. Do not repeatedly ask whether to run tests; wait for an explicit request.
+- When tests are explicitly requested, run only the affected tests. For PHP tests, use `php artisan test --compact` with a specific filename or filter.
 
 === inertia-laravel/core rules ===
 

@@ -1,14 +1,12 @@
 import { Link, useForm } from '@inertiajs/react'
 import { BookOpen, Plus, Search } from 'lucide-react'
 import { useState, type FormEvent } from 'react'
-import Input from '@/components/formElements/input'
 import { index, store, update, destroy } from '@/routes/dashboard/dictionary'
 
 type Entry = {
     id: number
     word: string
     translation: string
-    example: string | null
 }
 
 type Props = {
@@ -20,7 +18,7 @@ const primaryButton = 'inline-flex min-h-13 items-center justify-center gap-2 ro
 const secondaryButton = 'inline-flex min-h-12 items-center justify-center rounded-xl px-4 py-2 font-medium text-secondary hover:bg-blue-soft disabled:cursor-default disabled:opacity-60'
 
 function EntryEditor({ entry, onClose, onSaved }: { entry: Entry | null; onClose: () => void; onSaved: () => void }) {
-    const form = useForm({ word: entry?.word ?? '', translation: entry?.translation ?? '', example: entry?.example ?? '' })
+    const form = useForm({ word: entry?.word ?? '', translation: entry?.translation ?? '' })
     const submit = (event: FormEvent) => {
         event.preventDefault()
         const options = { preserveScroll: true, onSuccess: onSaved }
@@ -36,16 +34,15 @@ function EntryEditor({ entry, onClose, onSaved }: { entry: Entry | null; onClose
             <h2 className="text-2xl font-bold">{entry ? 'Редагувати слово' : 'Нове слово'}</h2>
             <form onSubmit={submit} className="mt-6">
                 <fieldset disabled={form.processing} className="space-y-5">
-                    <Input label="Слово або вираз польською" name="word" type="text" value={form.data.word} onChange={event => form.setData('word', event.target.value)} error={form.errors.word} />
                     <label className="block space-y-2">
-                        <span className="font-medium text-secondary">Переклад</span>
-                        <textarea name="translation" rows={2} maxLength={5000} value={form.data.translation} onChange={event => form.setData('translation', event.target.value)} className="w-full resize-y rounded-xl border border-control-border bg-white px-4 py-3 outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/15" />
-                        {form.errors.translation && <span className="block text-sm text-error">{form.errors.translation}</span>}
+                        <span className="block font-medium text-secondary">Слово або вираз польською</span>
+                        <input name="word" type="text" maxLength={255} value={form.data.word} onChange={event => form.setData('word', event.target.value)} className="w-full rounded-xl border border-control-border bg-white px-4 py-3 outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/15" />
+                        {form.errors.word && <span className="block text-sm text-error">{form.errors.word}</span>}
                     </label>
                     <label className="block space-y-2">
-                        <span className="font-medium text-secondary">Приклад <span className="font-normal text-quiet">— необов’язково</span></span>
-                        <textarea name="example" rows={2} maxLength={5000} value={form.data.example} onChange={event => form.setData('example', event.target.value)} className="w-full resize-y rounded-xl border border-control-border bg-white px-4 py-3 outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/15" />
-                        {form.errors.example && <span className="block text-sm text-error">{form.errors.example}</span>}
+                        <span className="block font-medium text-secondary">Переклад</span>
+                        <input name="translation" type="text" maxLength={5000} value={form.data.translation} onChange={event => form.setData('translation', event.target.value)} className="w-full rounded-xl border border-control-border bg-white px-4 py-3 outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/15" />
+                        {form.errors.translation && <span className="block text-sm text-error">{form.errors.translation}</span>}
                     </label>
                     <div className="flex flex-wrap gap-3">
                         <button type="submit" disabled={form.processing} className={primaryButton}>{form.processing ? 'Зберігаємо…' : 'Зберегти слово'}</button>
@@ -115,7 +112,6 @@ export default function Dictionary({ entries, search }: Props) {
                                 <div className="min-w-0 flex-1">
                                     <h2 className="text-xl font-bold wrap-anywhere">{entry.word}</h2>
                                     <p className="mt-2 whitespace-pre-wrap wrap-anywhere">{entry.translation}</p>
-                                    {entry.example && <p className="mt-3 whitespace-pre-wrap wrap-anywhere text-quiet"><span className="font-medium">Приклад: </span>{entry.example}</p>}
                                 </div>
                                 <div className="flex shrink-0 items-start gap-1">
                                     <button type="button" disabled={editor !== undefined || deletion.processing} onClick={() => openEditor(entry)} className={secondaryButton}>Редагувати</button>

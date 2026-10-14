@@ -24,11 +24,9 @@ class SaveVocabularyEntryRequest extends FormRequest
             $this->merge(['word' => VocabularyEntry::normalizeWord($this->input('word'))]);
         }
 
-        foreach (['translation', 'example'] as $field) {
-            if (is_string($this->input($field))) {
-                $value = Str::trim($this->input($field));
-                $this->merge([$field => $value === '' ? null : $value]);
-            }
+        if (is_string($this->input('translation'))) {
+            $value = Str::squish($this->input('translation'));
+            $this->merge(['translation' => $value === '' ? null : $value]);
         }
     }
 
@@ -37,8 +35,7 @@ class SaveVocabularyEntryRequest extends FormRequest
     {
         return [
             'word' => ['required', 'string', 'max:255'],
-            'translation' => ['required', 'string', 'max:5000'],
-            'example' => ['nullable', 'string', 'max:5000'],
+            'translation' => ['required', 'string', 'max:255']
         ];
     }
 

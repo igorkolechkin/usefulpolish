@@ -14,7 +14,7 @@ class VocabularyEntry extends Model
     /** @use HasFactory<\Database\Factories\VocabularyEntryFactory> */
     use HasFactory;
 
-    protected $fillable = ['word', 'translation', 'example'];
+    protected $fillable = ['word', 'translation'];
 
     protected $hidden = ['word_key'];
 

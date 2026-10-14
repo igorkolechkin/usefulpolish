@@ -9,31 +9,45 @@ use App\Models\VocabularyEntry;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\ValidationException;
+use Inertia\Inertia;
+use Inertia\Response as InertiaResponse;
 
 class VocabularyEntryController extends Controller
 {
-    public function index(Request $request): AnonymousResourceCollection
+    public function index(Request $request): AnonymousResourceCollection|InertiaResponse|RedirectResponse
     {
         Gate::authorize('viewAny', VocabularyEntry::class);
         $filters = $request->validate(['search' => ['nullable', 'string', 'max:255']]);
         $search = VocabularyEntry::normalizeWord($filters['search'] ?? '');
 
-        return VocabularyEntryResource::collection(
-            $request->user()->vocabularyEntries()
-                ->when($search !== '', function (Builder $query) use ($search): void {
-                    $query->where(function (Builder $query) use ($search): void {
-                        $pattern = '%'.addcslashes($search, '%_\\').'%';
-                        $query->whereLike('word', $pattern)->orWhereLike('translation', $pattern);
-                    });
-                })
-                ->latest('id')
-                ->paginate(30)
-                ->withQueryString(),
-        );
+        $entries = $request->user()->vocabularyEntries()
+            ->when($search !== '', function (Builder $query) use ($search): void {
+                $query->where(function (Builder $query) use ($search): void {
+                    $pattern = '%'.addcslashes($search, '%_\\').'%';
+                    $query->whereLike('word', $pattern)->orWhereLike('translation', $pattern);
+                });
+            })
+            ->latest('id')
+            ->paginate(30)
+            ->withQueryString();
+
+        if ($request->expectsJson()) {
+            return VocabularyEntryResource::collection($entries);
+        }
+
+        if ($entries->currentPage() > $entries->lastPage()) {
+            return to_route('dashboard.dictionary.index', ['search' => $search, 'page' => $entries->lastPage()]);
+        }
+
+        return Inertia::render('dashboard/dictionary', [
+            'entries' => $entries->through(fn (VocabularyEntry $entry): array => (new VocabularyEntryResource($entry))->resolve($request)),
+            'search' => $search,
+        ]);
     }
 
     public function show(VocabularyEntry $entry): VocabularyEntryResource
@@ -43,28 +57,32 @@ class VocabularyEntryController extends Controller
         return new VocabularyEntryResource($entry);
     }
 
-    public function store(SaveVocabularyEntryRequest $request): VocabularyEntryResource
+    public function store(SaveVocabularyEntryRequest $request): VocabularyEntryResource|RedirectResponse
     {
         $entry = $request->user()->vocabularyEntries()->make($request->validated());
         $this->saveEntry($entry);
 
-        return new VocabularyEntryResource($entry);
+        return $request->expectsJson()
+            ? new VocabularyEntryResource($entry)
+            : to_route('dashboard.dictionary.index');
     }
 
-    public function update(SaveVocabularyEntryRequest $request, VocabularyEntry $entry): VocabularyEntryResource
+    public function update(SaveVocabularyEntryRequest $request, VocabularyEntry $entry): VocabularyEntryResource|RedirectResponse
     {
         $entry->fill($request->validated());
         $this->saveEntry($entry);
 
-        return new VocabularyEntryResource($entry);
+        return $request->expectsJson()
+            ? new VocabularyEntryResource($entry)
+            : back();
     }
 
-    public function destroy(VocabularyEntry $entry): Response
+    public function destroy(Request $request, VocabularyEntry $entry): Response|RedirectResponse
     {
         Gate::authorize('delete', $entry);
         $entry->delete();
 
-        return response()->noContent();
+        return $request->expectsJson() ? response()->noContent() : back();
     }
 
     private function saveEntry(VocabularyEntry $entry): void

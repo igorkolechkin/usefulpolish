@@ -8,7 +8,15 @@ function Toaster({ ...props }: ToasterProps) {
         <Sonner
             theme="light"
             className="toaster group"
-            position="bottom-right"
+            position="top-right"
+            toastOptions={{
+                classNames: {
+                    success: '[&_[data-icon]]:text-success',
+                    error: '[&_[data-icon]]:text-error',
+                    warning: '[&_[data-icon]]:text-amber-600',
+                    info: '[&_[data-icon]]:text-secondary',
+                },
+            }}
             style={
                 {
                     '--normal-bg': 'var(--popover)',

@@ -1,15 +1,18 @@
 import * as Dialog from '@radix-ui/react-dialog'
 import { Link } from '@inertiajs/react'
-import { NotebookText, House, LogOut, Menu, X } from 'lucide-react'
+import { BookOpen, NotebookText, House, LogOut, Menu, UserRound, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { useCurrentUrl } from '@/hooks/use-current-url'
 import { cn } from '@/lib/utils'
 import { home, logout } from '@/routes'
 import { main, exercises } from '@/routes/dashboard'
+import { index as dictionary } from '@/routes/dashboard/dictionary'
+import { edit as profile } from '@/routes/profile'
 
 const navItems = [
     { title: 'Головна', href: main(), icon: House },
     { title: 'Вправи', href: exercises(), icon: NotebookText },
+    { title: 'Мій словник', href: dictionary(), icon: BookOpen },
 ]
 
 function Brand({ onNavigate }: { onNavigate?: () => void }) {
@@ -48,6 +51,13 @@ function Navigation({ onNavigate }: { onNavigate?: () => void }) {
                 </ul>
             </nav>
             <div className="mt-10 border-t border-border pt-4">
+                <Link href={profile()} onClick={onNavigate} className={cn(
+                    'mb-2 flex min-h-12 items-center gap-4 rounded-xl px-4 py-3 font-medium',
+                    isCurrentOrParentUrl(profile()) ? 'bg-brand-soft text-brand' : 'text-quiet hover:bg-canvas',
+                )}>
+                    <UserRound className="size-6" strokeWidth={1.8} />
+                    Профіль
+                </Link>
                 <Link href={logout()} as="button" onClick={onNavigate} className="flex min-h-12 w-full items-center gap-4 rounded-xl px-4 py-3 text-left font-medium text-quiet transition-colors hover:bg-brand-soft hover:text-brand focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-secondary motion-reduce:transition-none">
                     <LogOut className="size-6" strokeWidth={1.8} />
                     Вийти

@@ -1,7 +1,7 @@
 import { Form, Link } from '@inertiajs/react'
 import { useEffect, useState } from 'react'
 import Input from '@/components/formElements/input'
-import SubmitButton from '@/components/formElements/submitButton'
+import Button from '@/components/ui/button'
 import { register } from '@/routes'
 import { store } from '@/routes/login'
 import { request as passwordRequest } from '@/routes/password'
@@ -55,7 +55,7 @@ export default function LoginForm({ status }: { status?: string }) {
                         Запамʼятати мене
                     </label>
 
-                    <SubmitButton text="Увійти" disabled={processing} variant="auth" />
+                    <Button type="submit" disabled={processing} variant="primary">Увійти</Button>
 
                     <Link
                         href={passwordRequest()}

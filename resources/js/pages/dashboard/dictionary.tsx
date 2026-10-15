@@ -3,6 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog'
 import { BookOpen, Plus, X } from 'lucide-react'
 import { useState, type FormEvent, type ReactNode } from 'react'
 import Input from '@/components/formElements/input'
+import Button from '@/components/ui/button'
 import { index, store, update, destroy } from '@/routes/dashboard/dictionary'
 
 type Entry = {
@@ -16,8 +17,6 @@ type Props = {
     search: string
 }
 
-const primaryButton =
-    'inline-flex min-h-13 items-center justify-center gap-2 rounded-xl bg-brand px-5 py-3 font-bold text-white hover:bg-brand-hover disabled:cursor-default disabled:opacity-60'
 const secondaryButton =
     'inline-flex min-h-12 items-center justify-center rounded-xl px-4 py-2 font-medium text-secondary hover:bg-blue-soft disabled:cursor-default disabled:opacity-60'
 const dialogContent =
@@ -112,13 +111,13 @@ function EntryEditor({
                         error={form.errors.translation}
                     />
                     <div className="mt-8 flex justify-center">
-                        <button
+                        <Button
                             type="submit"
+                            variant="primary"
                             disabled={form.processing}
-                            className={primaryButton}
                         >
                             Зберегти слово
-                        </button>
+                        </Button>
                     </div>
                 </fieldset>
             </form>
@@ -154,14 +153,15 @@ function DeleteEntryDialog({
                 Слово <span className="text-xl font-bold wrap-anywhere">«{entry.word}»</span> буде видалено зі словника.
             </Dialog.Description>
             <div className="mt-8 flex justify-center">
-                <button
+                <Button
                     type="button"
+                    variant="primary"
                     disabled={deletion.processing}
                     onClick={deleteEntry}
-                    className="min-h-12 rounded-xl bg-error px-5 py-3 font-bold text-white hover:bg-error/90 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary disabled:cursor-default disabled:opacity-60"
+                    className="w-full bg-error hover:bg-error/90"
                 >
                     Так, видалити
-                </button>
+                </Button>
             </div>
         </DictionaryDialog>
     )
@@ -189,13 +189,9 @@ function DictionarySearch({ search }: { search: string }) {
                         error={form.errors.search}
                     />
                 </div>
-                <button
-                    type="submit"
-                    disabled={form.processing}
-                    className="min-h-13 rounded-xl border border-control-border px-6 py-3 font-medium text-secondary hover:bg-white disabled:opacity-60"
-                >
+                <Button type="submit" disabled={form.processing}>
                     Знайти
-                </button>
+                </Button>
                 {search && (
                     <Link href={index()} className={secondaryButton}>
                         Усі слова
@@ -221,10 +217,10 @@ export default function Dictionary({ entries, search }: Props) {
         <div className="space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-4">
                 <p className="max-w-xl text-quiet">Ваші польські слова та переклади.</p>
-                <button type="button" onClick={() => openEditor(null)} className={primaryButton}>
+                <Button type="button" variant="primary" onClick={() => openEditor(null)}>
                     <Plus className="size-5" />
                     Додати слово
-                </button>
+                </Button>
             </div>
             {message && (
                 <p className="rounded-xl bg-success-soft px-5 py-3 text-success">{message}</p>
@@ -268,23 +264,23 @@ export default function Dictionary({ entries, search }: Props) {
                                     </p>
                                 </div>
                                 <div className="flex shrink-0 items-start gap-1">
-                                    <button
+                                    <Button
                                         type="button"
                                         onClick={() => openEditor(entry)}
-                                        className={secondaryButton}
+                                        className="min-h-12 border-0 px-4 py-2 hover:bg-blue-soft"
                                     >
                                         Редагувати
-                                    </button>
-                                    <button
+                                    </Button>
+                                    <Button
                                         type="button"
                                         onClick={() => {
                                             setPendingDelete(entry)
                                             setMessage('')
                                         }}
-                                        className="min-h-12 rounded-xl px-4 py-2 font-medium text-error hover:bg-error-soft disabled:opacity-60"
+                                        className="min-h-12 border-0 px-4 py-2 text-error hover:bg-error-soft"
                                     >
                                         Видалити
-                                    </button>
+                                    </Button>
                                 </div>
                             </div>
                         </li>

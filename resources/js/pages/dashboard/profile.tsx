@@ -1,10 +1,9 @@
 import { useForm, usePage } from '@inertiajs/react'
 import type { FormEvent } from 'react'
 import Input from '@/components/formElements/input'
+import Button from '@/components/ui/button'
 import { update as updateProfile } from '@/routes/profile'
 import { update as updatePassword } from '@/routes/user-password'
-
-const saveButton = 'min-h-13 rounded-xl bg-brand px-6 py-3 font-bold text-white hover:bg-brand-hover disabled:cursor-default disabled:opacity-60'
 
 export default function Profile() {
     const { user } = usePage().props.auth
@@ -32,14 +31,28 @@ export default function Profile() {
                 <p className="mt-2 text-quiet">Тут можна змінити ім’я у своєму акаунті.</p>
                 <form onSubmit={saveProfile} className="mt-6 space-y-5">
                     <fieldset disabled={profile.processing} className="space-y-5">
-                        <Input label="Ім’я" name="name" type="text" autoComplete="name" value={profile.data.name} onChange={event => profile.setData('name', event.target.value)} error={profile.errors.name} />
+                        <Input
+                            label="Ім’я"
+                            name="name"
+                            type="text"
+                            autoComplete="name"
+                            value={profile.data.name}
+                            onChange={event => profile.setData('name', event.target.value)}
+                            error={profile.errors.name}
+                        />
                         <div className="rounded-xl bg-canvas px-4 py-3">
                             <p className="text-sm text-quiet">Email</p>
-                            <p className="mt-1 wrap-anywhere font-medium text-secondary">{user.email}</p>
+                            <p className="mt-1 font-medium wrap-anywhere text-secondary">
+                                {user.email}
+                            </p>
                         </div>
                         <div className="flex flex-wrap items-center gap-4">
-                            <button type="submit" disabled={profile.processing} className={saveButton}>Зберегти зміни</button>
-                            {profile.recentlySuccessful && <p className="text-success">Ім’я збережено.</p>}
+                            <Button type="submit" variant="primary" disabled={profile.processing}>
+                                Зберегти зміни
+                            </Button>
+                            {profile.recentlySuccessful && (
+                                <p className="text-success">Ім’я збережено.</p>
+                            )}
                         </div>
                     </fieldset>
                 </form>
@@ -49,12 +62,48 @@ export default function Profile() {
                 <p className="mt-2 text-quiet">Введіть поточний пароль і виберіть новий.</p>
                 <form onSubmit={savePassword} className="mt-6 space-y-5">
                     <fieldset disabled={password.processing} className="space-y-5">
-                        <Input label="Поточний пароль" name="current_password" type="password" autoComplete="current-password" value={password.data.current_password} onChange={event => password.setData('current_password', event.target.value)} error={password.errors.current_password} />
-                        <Input label="Новий пароль" name="password" type="password" autoComplete="new-password" value={password.data.password} onChange={event => password.setData('password', event.target.value)} error={password.errors.password} />
-                        <Input label="Повторіть новий пароль" name="password_confirmation" type="password" autoComplete="new-password" value={password.data.password_confirmation} onChange={event => password.setData('password_confirmation', event.target.value)} error={password.errors.password_confirmation} />
+                        <Input
+                            label="Поточний пароль"
+                            name="current_password"
+                            type="password"
+                            autoComplete="current-password"
+                            value={password.data.current_password}
+                            onChange={event =>
+                                password.setData('current_password', event.target.value)
+                            }
+                            error={password.errors.current_password}
+                        />
+                        <Input
+                            label="Новий пароль"
+                            name="password"
+                            type="password"
+                            autoComplete="new-password"
+                            value={password.data.password}
+                            onChange={event => password.setData('password', event.target.value)}
+                            error={password.errors.password}
+                        />
+                        <Input
+                            label="Повторіть новий пароль"
+                            name="password_confirmation"
+                            type="password"
+                            autoComplete="new-password"
+                            value={password.data.password_confirmation}
+                            onChange={event =>
+                                password.setData('password_confirmation', event.target.value)
+                            }
+                            error={password.errors.password_confirmation}
+                        />
                         <div className="flex flex-wrap items-center gap-4">
-                            <button type="submit" disabled={password.processing} className={saveButton}>Змінити пароль</button>
-                            {password.recentlySuccessful && <p className="text-success">Пароль змінено.</p>}
+                            <Button
+                                type="submit"
+                                variant="primary"
+                                disabled={password.processing}
+                            >
+                                Змінити пароль
+                            </Button>
+                            {password.recentlySuccessful && (
+                                <p className="text-success">Пароль змінено.</p>
+                            )}
                         </div>
                     </fieldset>
                 </form>

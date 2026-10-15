@@ -1,6 +1,6 @@
 import { Form } from '@inertiajs/react'
 import Input from '@/components/formElements/input'
-import SubmitButton from '@/components/formElements/submitButton'
+import Button from '@/components/ui/button'
 import { update } from '@/routes/password'
 
 export default function ResetPassword({ token, email }: { token: string; email: string }) {
@@ -39,11 +39,9 @@ export default function ResetPassword({ token, email }: { token: string; email: 
                         error={errors.password_confirmation}
                     />
 
-                    <SubmitButton
-                        text="Зберегти новий пароль"
-                        disabled={processing}
-                        variant="auth"
-                    />
+                    <Button type="submit" disabled={processing} variant="primary">
+                        Зберегти новий пароль
+                    </Button>
                 </>
             )}
         </Form>

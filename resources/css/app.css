@@ -122,6 +122,24 @@
     }
 }
 
+@layer components {
+    .button {
+        @apply inline-flex min-h-13 items-center justify-center gap-2 rounded-xl py-3 transition-colors disabled:cursor-default disabled:opacity-60;
+    }
+
+    .button--default {
+        @apply border border-control-border bg-canvas px-6 font-medium text-secondary hover:bg-white;
+    }
+
+    .button--primary {
+        @apply bg-brand px-5 font-bold text-white hover:bg-brand-hover focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary motion-reduce:transition-none;
+    }
+
+    .button--secondary {
+        @apply border border-control-border bg-white px-5 font-medium text-secondary hover:bg-blue-soft focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary motion-reduce:transition-none;
+    }
+}
+
 @layer utilities {
     @media (max-width: 768px) {
         :is(button, [role='button']):is(.min-h-12, .size-11, .size-12) {

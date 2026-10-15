@@ -1,7 +1,7 @@
 import { Form, Link } from '@inertiajs/react'
 import { useEffect, useState } from 'react'
 import Input from '@/components/formElements/input'
-import SubmitButton from '@/components/formElements/submitButton'
+import Button from '@/components/ui/button'
 import { login } from '@/routes'
 import { email as passwordEmail } from '@/routes/password'
 
@@ -37,11 +37,9 @@ export default function ForgotPassword({ status }: { status?: string }) {
                             error={errors.email}
                         />
 
-                        <SubmitButton
-                            text="Відправити посилання"
-                            disabled={processing}
-                            variant="auth"
-                        />
+                        <Button type="submit" disabled={processing} variant="primary">
+                            Відправити посилання
+                        </Button>
                     </>
                 )}
             </Form>

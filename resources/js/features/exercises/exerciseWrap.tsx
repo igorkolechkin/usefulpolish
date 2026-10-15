@@ -1,5 +1,6 @@
 import { ArrowRight, CircleAlert } from 'lucide-react'
 import type { ReactNode } from 'react'
+import Button from '@/components/ui/button'
 
 type Props = {
     description: ReactNode
@@ -37,14 +38,15 @@ export default function ExerciseWrap({
             )}
 
             <div className="flex justify-end border-t border-border pt-6">
-                <button
+                <Button
                     type="button"
+                    variant="primary"
                     disabled={checkDisabled}
                     onClick={onCheck}
-                    className="inline-flex min-h-13 items-center justify-center gap-3 rounded-2xl bg-brand px-6 py-3 font-bold text-white hover:bg-brand-hover focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary disabled:cursor-not-allowed disabled:bg-canvas disabled:text-quiet"
+                    className="gap-3 disabled:cursor-not-allowed disabled:bg-canvas disabled:text-quiet disabled:opacity-100"
                 >
                     Перевірити <ArrowRight className="size-5" />
-                </button>
+                </Button>
             </div>
         </section>
     )

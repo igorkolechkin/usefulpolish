@@ -1,6 +1,6 @@
-import type { ExerciseItem } from '../../../types/exercises'
-import ArrangeWords from './arrange-words'
-import ChooseWord from './choose-word'
+import type { ExerciseItem } from '../../types/exercises'
+import ArrangeWords from './exercisesTypes/arrange-words'
+import ChooseWord from './exercisesTypes/choose-word'
 
 type Props = {
     item: ExerciseItem

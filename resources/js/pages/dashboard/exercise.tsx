@@ -1,7 +1,8 @@
 import { Link, router } from '@inertiajs/react'
 import { ArrowLeft, BookOpen, CircleCheck, RotateCcw } from 'lucide-react'
 import { useCallback, useEffect, useState } from 'react'
-import ExerciseItemRenderer from '@/features/exercises/components/exercise-item-renderer'
+import Button from '@/components/ui/button'
+import ExerciseItemRenderer from '@/features/exercises/exercise-item-renderer'
 import { exercises } from '@/routes/dashboard'
 import type { Exercise } from '@/types/exercises'
 
@@ -57,10 +58,10 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
                     <p className="text-3xl leading-tight font-bold text-secondary">Вправу завершено!</p>
                     <p className="max-w-md text-lg leading-relaxed text-quiet">Ви правильно виконали всі завдання. Чудова робота!</p>
                     <div className="mt-3 flex w-full flex-col justify-center gap-4 sm:w-auto sm:flex-row">
-                        <button type="button" onClick={resetProgress} className="inline-flex min-h-13 items-center justify-center gap-3 rounded-2xl bg-brand px-6 py-3 font-bold text-white hover:bg-brand-hover focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary">
+                        <Button type="button" variant="primary" onClick={resetProgress} className="gap-3">
                             <RotateCcw className="size-5" /> Пройти ще раз
-                        </button>
-                        <Link href={exercises()} className="inline-flex min-h-13 items-center justify-center rounded-2xl border border-control-border px-6 py-3 font-medium text-secondary hover:bg-blue-soft focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary">Інші вправи</Link>
+                        </Button>
+                        <Link href={exercises()} className="button button--default">Інші вправи</Link>
                     </div>
                 </section>
             ) : (

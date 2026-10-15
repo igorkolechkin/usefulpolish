@@ -150,8 +150,8 @@ function DeleteEntryDialog({
             processing={deletion.processing}
             onClose={onClose}
         >
-            <Dialog.Description className="mt-2 wrap-anywhere text-ink">
-                Слово <span className="text-xl font-bold">«{entry.word}»</span> буде видалено зі словника.
+            <Dialog.Description className="mt-2 text-ink">
+                Слово <span className="text-xl font-bold wrap-anywhere">«{entry.word}»</span> буде видалено зі словника.
             </Dialog.Description>
             <div className="mt-8 flex justify-center">
                 <button
@@ -263,7 +263,7 @@ export default function Dictionary({ entries, search }: Props) {
                                     <p className="text-xl leading-tight font-bold text-secondary wrap-anywhere">
                                         {entry.word}
                                     </p>
-                                    <p className="mt-2 wrap-anywhere whitespace-pre-wrap">
+                                    <p className="mt-2 whitespace-pre-wrap">
                                         {entry.translation}
                                     </p>
                                 </div>

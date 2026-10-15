@@ -16,7 +16,7 @@ export default function Main() {
         <div className="space-y-7">
             <div className="flex flex-wrap items-center justify-between gap-5 rounded-3xl border border-border bg-white p-6 sm:p-8">
                 <div className="min-w-0">
-                    <p className="text-2xl leading-tight font-bold text-secondary wrap-anywhere">Вітаємо, {user.name}!</p>
+                    <p className="text-2xl leading-tight font-bold text-secondary">Вітаємо, {user.name}!</p>
                     <p className="mt-2 text-quiet">Оберіть, над чим хочете попрацювати сьогодні.</p>
                 </div>
                 <Link href={profile()} className="inline-flex min-h-12 items-center gap-2 rounded-xl px-4 font-medium text-secondary hover:bg-blue-soft">Мій профіль <ArrowRight className="size-5" /></Link>

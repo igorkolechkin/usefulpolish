@@ -38,7 +38,7 @@ export default function Exercises({ exercises }: { exercises: ExercisesList }) {
                         )}>Усі теми</button>
                         {tags.map(tag => (
                             <button key={tag.id} type="button" onClick={() => setSelectedTag(tag.id)} className={cn(
-                                'min-h-12 max-w-full rounded-full border px-6 py-2.5 text-left font-medium wrap-anywhere transition-colors focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary motion-reduce:transition-none',
+                                'min-h-12 max-w-full rounded-full border px-6 py-2.5 text-left font-medium transition-colors focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary motion-reduce:transition-none',
                                 selectedTag === tag.id ? 'border-brand-soft bg-brand-soft text-brand' : 'border-border text-secondary hover:border-secondary/40 hover:bg-white',
                             )}>{tag.title}</button>
                         ))}

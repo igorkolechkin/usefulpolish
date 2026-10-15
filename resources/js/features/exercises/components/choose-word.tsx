@@ -9,8 +9,9 @@ type Props = {
 }
 
 export default function ChooseWord({ item, onCorrect }: Props) {
-    const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null)
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(null)
     const [isWrong, setIsWrong] = useState(false)
+    const selectedAnswer = selectedIndex === null ? null : item.options[selectedIndex]
 
     const checkAnswer = () => {
         if (selectedAnswer === item.correct_answer) {
@@ -20,8 +21,8 @@ export default function ChooseWord({ item, onCorrect }: Props) {
         setIsWrong(true)
     }
 
-    const selectAnswer = (answer: string) => {
-        setSelectedAnswer(answer)
+    const selectAnswer = (index: number) => {
+        setSelectedIndex(index)
         setIsWrong(false)
     }
 
@@ -42,9 +43,9 @@ export default function ChooseWord({ item, onCorrect }: Props) {
             </p>
             <div className="grid gap-4 sm:grid-cols-2">
                 {item.options.map((option, index) => {
-                    const isSelected = selectedAnswer === option
+                    const isSelected = selectedIndex === index
                     return (
-                        <button key={`${option}-${index}`} type="button" onClick={() => selectAnswer(option)} className={cn(
+                        <button key={`${option}-${index}`} type="button" onClick={() => selectAnswer(index)} className={cn(
                             'flex min-h-20 min-w-0 items-center gap-4 rounded-2xl border-2 px-5 py-4 text-left text-lg font-medium transition-colors focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary motion-reduce:transition-none',
                             isSelected ? (isWrong ? 'border-error bg-error-soft text-error' : 'border-secondary bg-blue-soft text-secondary') : 'border-control-border bg-white text-ink hover:border-secondary hover:bg-canvas',
                         )}>
@@ -63,7 +64,7 @@ export default function ChooseWord({ item, onCorrect }: Props) {
             )}
             <div className="flex flex-col gap-4 border-t border-border pt-6 sm:flex-row sm:items-center sm:justify-between">
                 <p className="text-sm leading-relaxed text-quiet">Оберіть відповідь і натисніть «Перевірити».</p>
-                <button type="button" disabled={selectedAnswer === null} onClick={checkAnswer} className="inline-flex min-h-13 shrink-0 items-center justify-center gap-3 rounded-2xl bg-brand px-6 py-3 font-bold text-white hover:bg-brand-hover focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary disabled:cursor-not-allowed disabled:bg-canvas disabled:text-quiet">
+                <button type="button" disabled={selectedIndex === null} onClick={checkAnswer} className="inline-flex min-h-13 shrink-0 items-center justify-center gap-3 rounded-2xl bg-brand px-6 py-3 font-bold text-white hover:bg-brand-hover focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary disabled:cursor-not-allowed disabled:bg-canvas disabled:text-quiet">
                     Перевірити <ArrowRight className="size-5" />
                 </button>
             </div>

@@ -10,7 +10,7 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
     const [currentIndex, setCurrentIndex] = useState(0)
     const [isCompleted, setIsCompleted] = useState(false)
     const completedCount = isCompleted ? items.length : currentIndex
-    const progress = items.length > 0 ? Math.round((completedCount / items.length) * 100) : 0
+    const progress = items.length > 0 ? Math.floor((completedCount / items.length) * 100) : 0
 
     const resetProgress = useCallback(() => {
         setCurrentIndex(0)

@@ -9,10 +9,9 @@ import type { ExercisesList } from '@/types/exercises'
 export default function Exercises({ exercises }: { exercises: ExercisesList }) {
     const [query, setQuery] = useState('')
     const [selectedTag, setSelectedTag] = useState<number | null>(null)
-    const activeExercises = exercises.filter(exercise => exercise.is_active)
-    const tags = [...new Map(activeExercises.flatMap(exercise => exercise.tags).map(tag => [tag.id, tag])).values()]
+    const tags = [...new Map(exercises.flatMap(exercise => exercise.tags).map(tag => [tag.id, tag])).values()]
     const searchQuery = query.trim().normalize('NFC').toLocaleLowerCase('uk')
-    const filteredExercises = activeExercises.filter(exercise => {
+    const filteredExercises = exercises.filter(exercise => {
         const matchesTag = selectedTag === null || exercise.tags.some(tag => tag.id === selectedTag)
         const searchableText = [exercise.title, ...exercise.tags.map(tag => tag.title)].join(' ').normalize('NFC').toLocaleLowerCase('uk')
         return matchesTag && searchableText.includes(searchQuery)
@@ -20,7 +19,7 @@ export default function Exercises({ exercises }: { exercises: ExercisesList }) {
 
     return (
         <div className="space-y-7">
-            {activeExercises.length > 0 && (
+            {exercises.length > 0 && (
                 <>
                     <div className="flex items-center gap-3">
                         <div className="min-w-0 flex-1">

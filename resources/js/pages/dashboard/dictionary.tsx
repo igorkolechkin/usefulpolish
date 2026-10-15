@@ -1,7 +1,7 @@
 import { Link, useForm } from '@inertiajs/react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { BookOpen, Plus, X } from 'lucide-react'
-import { useState, type FormEvent } from 'react'
+import { useState, type FormEvent, type ReactNode } from 'react'
 import Input from '@/components/formElements/input'
 import { index, store, update, destroy } from '@/routes/dashboard/dictionary'
 
@@ -22,6 +22,45 @@ const secondaryButton =
     'inline-flex min-h-12 items-center justify-center rounded-xl px-4 py-2 font-medium text-secondary hover:bg-blue-soft disabled:cursor-default disabled:opacity-60'
 const dialogContent =
     'fixed top-1/2 left-1/2 z-50 max-h-[calc(100dvh-2rem)] w-[calc(100vw-2rem)] max-w-[560px] -translate-x-1/2 -translate-y-1/2 overflow-y-auto rounded-[24px] border border-border bg-white p-6 shadow-xl sm:p-8'
+
+function DictionaryDialog({
+    title,
+    processing,
+    onClose,
+    children,
+}: {
+    title: string
+    processing: boolean
+    onClose: () => void
+    children: ReactNode
+}) {
+    return (
+        <Dialog.Root open>
+            <Dialog.Portal>
+                <Dialog.Overlay className="fixed inset-0 z-40 bg-secondary/40" />
+                <Dialog.Content className={dialogContent}>
+                    <div className="flex items-center justify-between gap-4">
+                        <Dialog.Title asChild>
+                            <p className="text-2xl leading-tight font-bold text-secondary">
+                                {title}
+                            </p>
+                        </Dialog.Title>
+                        <button
+                            type="button"
+                            title="Закрити"
+                            onClick={onClose}
+                            disabled={processing}
+                            className="flex size-11 shrink-0 items-center justify-center rounded-xl text-quiet hover:bg-canvas hover:text-secondary focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-secondary disabled:cursor-default disabled:opacity-60"
+                        >
+                            <X className="size-5" />
+                        </button>
+                    </div>
+                    {children}
+                </Dialog.Content>
+            </Dialog.Portal>
+        </Dialog.Root>
+    )
+}
 
 function EntryEditor({
     entry,
@@ -44,63 +83,46 @@ function EntryEditor({
     }
 
     return (
-        <Dialog.Root open>
-            <Dialog.Portal>
-                <Dialog.Overlay className="fixed inset-0 z-40 bg-secondary/40" />
-                <Dialog.Content className={dialogContent}>
-                    <div className="flex items-center justify-between  gap-4">
-                        <Dialog.Title asChild>
-                            <p className="text-2xl leading-tight font-bold text-secondary">
-                                {entry ? 'Редагувати слово' : 'Нове слово'}
-                            </p>
-                        </Dialog.Title>
+        <DictionaryDialog
+            title={entry ? 'Редагувати слово' : 'Нове слово'}
+            processing={form.processing}
+            onClose={onClose}
+        >
+            <Dialog.Description className="mt-2 text-quiet">
+                Вкажіть слово польською та його переклад.
+            </Dialog.Description>
+            <form onSubmit={submit} className="mt-8">
+                <fieldset disabled={form.processing} className="space-y-5">
+                    <Input
+                        label="Слово або вираз польською"
+                        name="word"
+                        type="text"
+                        maxLength={255}
+                        value={form.data.word}
+                        onChange={event => form.setData('word', event.target.value)}
+                        error={form.errors.word}
+                    />
+                    <Input
+                        label="Переклад"
+                        name="translation"
+                        type="text"
+                        maxLength={255}
+                        value={form.data.translation}
+                        onChange={event => form.setData('translation', event.target.value)}
+                        error={form.errors.translation}
+                    />
+                    <div className="mt-8 flex justify-center">
                         <button
-                            type="button"
-                            title="Закрити"
-                            onClick={onClose}
+                            type="submit"
                             disabled={form.processing}
-                            className="flex size-11 shrink-0 items-center justify-center rounded-xl text-quiet hover:bg-canvas hover:text-secondary focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-secondary disabled:cursor-default disabled:opacity-60"
+                            className={primaryButton}
                         >
-                            <X className="size-5" />
+                            Зберегти слово
                         </button>
                     </div>
-                    <Dialog.Description className="mt-2 text-quiet">
-                        Вкажіть слово польською та його переклад.
-                    </Dialog.Description>
-                    <form onSubmit={submit} className="mt-8">
-                        <fieldset disabled={form.processing} className="space-y-5">
-                            <Input
-                                label="Слово або вираз польською"
-                                name="word"
-                                type="text"
-                                maxLength={255}
-                                value={form.data.word}
-                                onChange={event => form.setData('word', event.target.value)}
-                                error={form.errors.word}
-                            />
-                            <Input
-                                label="Переклад"
-                                name="translation"
-                                type="text"
-                                maxLength={255}
-                                value={form.data.translation}
-                                onChange={event => form.setData('translation', event.target.value)}
-                                error={form.errors.translation}
-                            />
-                            <div className="flex justify-center mt-8">
-                                <button
-                                    type="submit"
-                                    disabled={form.processing}
-                                    className={primaryButton}
-                                >
-                                    Зберегти слово
-                                </button>
-                            </div>
-                        </fieldset>
-                    </form>
-                </Dialog.Content>
-            </Dialog.Portal>
-        </Dialog.Root>
+                </fieldset>
+            </form>
+        </DictionaryDialog>
     )
 }
 
@@ -123,42 +145,25 @@ function DeleteEntryDialog({
     }
 
     return (
-        <Dialog.Root open>
-            <Dialog.Portal>
-                <Dialog.Overlay className="fixed inset-0 z-40 bg-secondary/40" />
-                <Dialog.Content className={dialogContent}>
-                    <div className="flex items-center justify-between gap-4">
-                        <Dialog.Title asChild>
-                            <p className="text-2xl leading-tight font-bold text-secondary">
-                                Видалити слово?
-                            </p>
-                        </Dialog.Title>
-                        <button
-                            type="button"
-                            title="Закрити"
-                            onClick={onClose}
-                            disabled={deletion.processing}
-                            className="flex size-11 shrink-0 items-center justify-center rounded-xl text-quiet hover:bg-canvas hover:text-secondary focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-secondary disabled:cursor-default disabled:opacity-60"
-                        >
-                            <X className="size-5" />
-                        </button>
-                    </div>
-                    <Dialog.Description className="mt-2 wrap-anywhere text-ink">
-                        Слово <span className="text-xl font-bold">«{entry.word}»</span> буде видалено зі словника.
-                    </Dialog.Description>
-                    <div className="mt-8 flex justify-center">
-                        <button
-                            type="button"
-                            disabled={deletion.processing}
-                            onClick={deleteEntry}
-                            className="min-h-12 rounded-xl bg-error px-5 py-3 font-bold text-white hover:bg-error/90 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary disabled:cursor-default disabled:opacity-60"
-                        >
-                            Так, видалити
-                        </button>
-                    </div>
-                </Dialog.Content>
-            </Dialog.Portal>
-        </Dialog.Root>
+        <DictionaryDialog
+            title="Видалити слово?"
+            processing={deletion.processing}
+            onClose={onClose}
+        >
+            <Dialog.Description className="mt-2 wrap-anywhere text-ink">
+                Слово <span className="text-xl font-bold">«{entry.word}»</span> буде видалено зі словника.
+            </Dialog.Description>
+            <div className="mt-8 flex justify-center">
+                <button
+                    type="button"
+                    disabled={deletion.processing}
+                    onClick={deleteEntry}
+                    className="min-h-12 rounded-xl bg-error px-5 py-3 font-bold text-white hover:bg-error/90 focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary disabled:cursor-default disabled:opacity-60"
+                >
+                    Так, видалити
+                </button>
+            </div>
+        </DictionaryDialog>
     )
 }
 

@@ -41,7 +41,7 @@ function EntryEditor({ entry, onClose, onSaved }: { entry: Entry | null; onClose
                     </label>
                     <label className="block space-y-2">
                         <span className="block font-medium text-secondary">Переклад</span>
-                        <input name="translation" type="text" maxLength={5000} value={form.data.translation} onChange={event => form.setData('translation', event.target.value)} className="w-full rounded-xl border border-control-border bg-white px-4 py-3 outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/15" />
+                        <input name="translation" type="text" maxLength={255} value={form.data.translation} onChange={event => form.setData('translation', event.target.value)} className="w-full rounded-xl border border-control-border bg-white px-4 py-3 outline-none focus:border-secondary focus:ring-2 focus:ring-secondary/15" />
                         {form.errors.translation && <span className="block text-sm text-error">{form.errors.translation}</span>}
                     </label>
                     <div className="flex flex-wrap gap-3">
@@ -97,7 +97,7 @@ export default function Dictionary({ entries, search }: Props) {
     return (
         <div className="space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-4">
-                <p className="max-w-xl text-quiet">Ваші польські слова, переклади та приклади.</p>
+                <p className="max-w-xl text-quiet">Ваші польські слова та переклади.</p>
                 {editor === undefined && <button type="button" onClick={() => openEditor(null)} className={primaryButton}><Plus className="size-5" />Додати слово</button>}
             </div>
             {message && <p className="rounded-xl bg-success-soft px-5 py-3 text-success">{message}</p>}

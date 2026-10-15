@@ -6,7 +6,7 @@ import { edit as profile } from '@/routes/profile'
 
 const sections = [
     { title: 'Вправи', description: 'Практикуйте польську та закріплюйте знання у завданнях.', href: exercises(), icon: NotebookText, action: 'До вправ' },
-    { title: 'Мій словник', description: 'Зберігайте польські слова, переклади та приклади в одному місці.', href: dictionary(), icon: BookOpen, action: 'Відкрити словник' },
+    { title: 'Мій словник', description: 'Зберігайте польські слова та переклади в одному місці.', href: dictionary(), icon: BookOpen, action: 'Відкрити словник' },
 ]
 
 export default function Main() {

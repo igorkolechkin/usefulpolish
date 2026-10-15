@@ -95,7 +95,9 @@ export default function Aside() {
                     <Dialog.Portal>
                         <Dialog.Overlay className="fixed inset-0 z-40 bg-secondary/30" />
                         <Dialog.Content aria-describedby={undefined} className="fixed inset-y-0 left-0 z-50 w-[min(320px,90vw)] overflow-y-auto bg-white shadow-xl">
-                            <Dialog.Title className="sr-only">Меню навчання</Dialog.Title>
+                            <Dialog.Title asChild>
+                                <span className="sr-only">Меню навчання</span>
+                            </Dialog.Title>
                             <Dialog.Close asChild>
                                 <button type="button" title="Закрити меню" className="absolute top-2 right-2 flex size-11 items-center justify-center rounded-xl text-quiet hover:bg-canvas focus-visible:outline-3 focus-visible:outline-secondary">
                                     <X className="size-5" />

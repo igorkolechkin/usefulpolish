@@ -2,6 +2,7 @@ import { Form, Link } from '@inertiajs/react'
 import { useEffect, useState } from 'react'
 import Input from '@/components/formElements/input'
 import SubmitButton from '@/components/formElements/submitButton'
+import { register } from '@/routes'
 import { store } from '@/routes/login'
 import { request as passwordRequest } from '@/routes/password'
 
@@ -19,11 +20,11 @@ export default function LoginForm({ status }: { status?: string }) {
     }, [status])
 
     return (
-        <Form {...store.form()} resetOnSuccess={['password']} className="space-y-4">
+        <Form {...store.form()} resetOnSuccess={['password']} className="space-y-5">
             {({ processing, errors }) => (
                 <>
                     {status && isShowStatus && (
-                        <div className="rounded-md bg-muted p-4 text-center text-sm font-medium text-primary">
+                        <div className="rounded-xl border border-secondary/15 bg-blue-soft p-4 font-medium text-secondary">
                             {status}
                         </div>
                     )}
@@ -44,24 +45,28 @@ export default function LoginForm({ status }: { status?: string }) {
                         error={errors.password}
                     />
 
-                    <label className="flex items-center gap-2 text-sm">
+                    <label className="flex min-h-11 items-center gap-3 font-medium text-ink">
                         <input
                             type="checkbox"
                             name="remember"
                             value="1"
-                            className="size-4 rounded border-border"
+                            className="size-5 rounded border-control-border accent-brand"
                         />
                         Запамʼятати мене
                     </label>
 
-                    <SubmitButton text="Увійти" disabled={processing} />
+                    <SubmitButton text="Увійти" disabled={processing} variant="auth" />
 
                     <Link
                         href={passwordRequest()}
-                        className="block cursor-pointer text-center text-sm font-medium text-primary hover:text-primary-hover disabled:opacity-60"
+                        className="block rounded-lg text-center font-medium text-secondary hover:text-brand focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-secondary"
                     >
                         Забули пароль?
                     </Link>
+                    <p className="border-t border-border pt-5 text-center text-quiet">
+                        Ще немає акаунта?{' '}
+                        <Link href={register()} className="rounded-lg font-bold text-secondary hover:text-brand focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-secondary">Зареєструватися</Link>
+                    </p>
                 </>
             )}
         </Form>

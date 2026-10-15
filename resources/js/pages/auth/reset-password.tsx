@@ -8,7 +8,7 @@ export default function ResetPassword({ token, email }: { token: string; email: 
         <Form
             {...update.form()}
             resetOnSuccess={['password', 'password_confirmation']}
-            className="space-y-4"
+            className="space-y-5"
         >
             {({ processing, errors }) => (
                 <>
@@ -40,8 +40,9 @@ export default function ResetPassword({ token, email }: { token: string; email: 
                     />
 
                     <SubmitButton
-                        text={processing ? 'Зберігаємо...' : 'Зберегти новий пароль'}
+                        text="Зберегти новий пароль"
                         disabled={processing}
+                        variant="auth"
                     />
                 </>
             )}

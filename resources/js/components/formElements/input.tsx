@@ -10,6 +10,7 @@ type Props = {
     error?: string
     value?: string
     onChange?: ChangeEventHandler<HTMLInputElement>
+    maxLength?: number
 }
 
 export default function Input({
@@ -21,6 +22,7 @@ export default function Input({
     error,
     value,
     onChange,
+    maxLength,
 }: Props) {
     const valueProps =
         value === undefined
@@ -35,9 +37,11 @@ export default function Input({
                     type={type}
                     placeholder=" "
                     autoComplete={autoComplete}
+                    maxLength={maxLength}
                     {...valueProps}
                     className={cn(
                         'peer w-full rounded-md border border-input bg-white px-4 pt-6 pb-2 outline-none transition focus:border-primary focus:ring-3 focus:ring-primary/15',
+                        type === 'search' && '[&::-webkit-search-cancel-button]:appearance-none',
                         error && 'border-destructive focus:border-destructive',
                     )}
                 />

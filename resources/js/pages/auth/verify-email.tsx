@@ -20,13 +20,13 @@ export default function VerifyEmail({ status }: { status?: string }) {
     return (
         <>
             {status === 'verification-link-sent' && isShowStatus && (
-                <div className="mb-4 rounded-md bg-muted p-4 text-center text-sm font-medium text-primary">
+                <div className="mb-6 rounded-xl border border-success/20 bg-success-soft p-4 font-medium text-success">
                     Новий лист для підтвердження email відправлено.
                 </div>
             )}
 
-            <div className="space-y-6 text-center">
-                <p className="text-sm leading-6">
+            <div className="space-y-5">
+                <p className="text-base leading-relaxed text-ink">
                     Ми відправили лист із посиланням для підтвердження. Перевірте пошту та перейдіть
                     за посиланням, щоб продовжити навчання.
                 </p>
@@ -34,8 +34,9 @@ export default function VerifyEmail({ status }: { status?: string }) {
                 <Form {...send.form()}>
                     {({ processing }) => (
                         <SubmitButton
-                            text={processing ? 'Відправляємо...' : 'Відправити лист ще раз'}
+                            text="Відправити лист ще раз"
                             disabled={processing}
+                            variant="auth"
                         />
                     )}
                 </Form>
@@ -45,6 +46,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
                         <SubmitButton
                             text="Вийти з акаунта"
                             disabled={processing}
+                            variant="secondary"
                         />
                     )}
                 </Form>

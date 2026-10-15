@@ -1,7 +1,8 @@
 import { Link } from '@inertiajs/react'
-import { ArrowRight, BookOpen, Search, X } from 'lucide-react'
+import { ArrowRight, BookOpen, X } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import Input from '@/components/formElements/input'
 import { show } from '@/routes/dashboard/exercises'
 import type { ExercisesList } from '@/types/exercises'
 
@@ -21,13 +22,12 @@ export default function Exercises({ exercises }: { exercises: ExercisesList }) {
         <div className="space-y-7">
             {activeExercises.length > 0 && (
                 <>
-                    <div className="flex items-center gap-4 rounded-2xl border border-control-border/60 bg-white px-5 py-3 focus-within:border-secondary focus-within:ring-2 focus-within:ring-secondary/20 sm:px-6">
-                        <Search className="size-6 shrink-0 text-quiet" strokeWidth={1.8} />
+                    <div className="flex items-center gap-3">
                         <div className="min-w-0 flex-1">
-                            <input type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Пошук вправ…" className="min-h-9 w-full appearance-none bg-transparent text-lg text-secondary outline-none placeholder:text-quiet/80 [&::-webkit-search-cancel-button]:appearance-none" />
+                            <Input label="Пошук вправ" name="search" type="search" value={query} onChange={event => setQuery(event.target.value)} />
                         </div>
                         {query && (
-                            <button type="button" onClick={() => setQuery('')} title="Очистити пошук" className="flex size-8 shrink-0 items-center justify-center rounded-xl text-quiet hover:bg-canvas focus-visible:outline-3 focus-visible:outline-secondary">
+                            <button type="button" onClick={() => setQuery('')} title="Очистити пошук" className="flex size-11 shrink-0 items-center justify-center rounded-xl text-quiet hover:bg-canvas focus-visible:outline-3 focus-visible:outline-secondary">
                                 <X className="size-5" />
                             </button>
                         )}
@@ -51,7 +51,7 @@ export default function Exercises({ exercises }: { exercises: ExercisesList }) {
                     {filteredExercises.map(exercise => (
                         <li key={exercise.id} className="min-w-0">
                             <Link href={show(exercise.slug)} className="group flex h-full min-h-[10.5rem] flex-col items-start gap-2 rounded-[22px] border border-border bg-white p-6 transition-shadow duration-200 hover:shadow-[0_8px_24px_-8px_rgb(37_57_111_/_0.18)] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-secondary motion-reduce:transition-none">
-                                <h2 className="text-xl leading-snug font-bold text-secondary lg:text-[1.65rem]">{exercise.title}</h2>
+                                <p className="text-xl leading-snug font-bold text-secondary lg:text-[1.65rem]">{exercise.title}</p>
                                 {exercise.tags.length > 0 && (
                                     <div className="flex flex-wrap gap-2">
                                         {exercise.tags.map(tag => (
@@ -67,7 +67,7 @@ export default function Exercises({ exercises }: { exercises: ExercisesList }) {
             ) : (
                 <div className="flex flex-col items-center gap-4 rounded-3xl border border-border bg-white px-6 py-14 text-center">
                     <BookOpen className="size-10 text-secondary" strokeWidth={1.5} />
-                    <h2 className="text-2xl font-bold">Вправ не знайдено</h2>
+                    <p className="text-2xl leading-tight font-bold text-secondary">Вправ не знайдено</p>
                     <p className="max-w-md leading-relaxed text-quiet">Спробуйте іншу назву або виберіть іншу тему.</p>
                 </div>
             )}

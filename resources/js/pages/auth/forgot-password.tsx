@@ -21,12 +21,12 @@ export default function ForgotPassword({ status }: { status?: string }) {
     return (
         <div className="space-y-6">
             {status && isShowStatus && (
-                <div className="rounded-md bg-muted p-4 text-center text-sm font-medium text-primary">
+                <div className="rounded-xl border border-success/20 bg-success-soft p-4 font-medium text-success">
                     {status}
                 </div>
             )}
 
-            <Form {...passwordEmail.form()} className="space-y-4">
+            <Form {...passwordEmail.form()} className="space-y-5">
                 {({ processing, errors }) => (
                     <>
                         <Input
@@ -38,8 +38,9 @@ export default function ForgotPassword({ status }: { status?: string }) {
                         />
 
                         <SubmitButton
-                            text={processing ? 'Відправляємо...' : 'Відправити посилання'}
+                            text="Відправити посилання"
                             disabled={processing}
+                            variant="auth"
                         />
                     </>
                 )}
@@ -47,7 +48,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
 
             <Link
                 href={login()}
-                className="block text-center text-sm font-medium text-primary hover:text-primary-hover"
+                className="block rounded-lg text-center font-medium text-secondary hover:text-brand focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-secondary"
             >
                 Повернутися до входу
             </Link>

@@ -1,14 +1,15 @@
-import { Form } from '@inertiajs/react'
+import { Form, Link } from '@inertiajs/react'
 import Input from '@/components/formElements/input'
 import SubmitButton from '@/components/formElements/submitButton'
 import { store } from '@/routes/register'
+import { login } from '@/routes'
 
 export default function RegisterForm() {
     return (
         <Form
             {...store.form()}
             resetOnSuccess={['password', 'password_confirmation']}
-            className="space-y-4"
+            className="space-y-5"
         >
             {({ processing, errors }) => (
                 <>
@@ -44,7 +45,11 @@ export default function RegisterForm() {
                         error={errors.password_confirmation}
                     />
 
-                    <SubmitButton text="Зареєструватися" disabled={processing} />
+                    <SubmitButton text="Зареєструватися" disabled={processing} variant="auth" />
+                    <p className="border-t border-border pt-5 text-center text-quiet">
+                        Уже маєте акаунт?{' '}
+                        <Link href={login()} className="rounded-lg font-bold text-secondary hover:text-brand focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-secondary">Увійти</Link>
+                    </p>
                 </>
             )}
         </Form>

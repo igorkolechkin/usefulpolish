@@ -48,13 +48,13 @@ export default function Exercise({ exercise }: { exercise: Exercise }) {
             {items.length === 0 ? (
                 <section className="flex flex-col items-center gap-4 rounded-3xl border border-border bg-white px-6 py-14 text-center">
                     <BookOpen className="size-10 text-secondary" />
-                    <h2 className="text-2xl font-bold">Завдання скоро з’являться</h2>
+                    <p className="text-2xl leading-tight font-bold text-secondary">Завдання скоро з’являться</p>
                     <p className="max-w-md leading-relaxed text-quiet">У цій вправі ще немає завдань. Поки що можна вибрати іншу.</p>
                 </section>
             ) : isCompleted ? (
                 <section className="flex flex-col items-center gap-5 rounded-3xl border border-border bg-white px-6 py-12 text-center sm:p-12">
                     <div className="flex size-20 items-center justify-center rounded-full bg-success-soft text-success"><CircleCheck className="size-10" strokeWidth={1.7} /></div>
-                    <h2 className="text-3xl font-bold">Вправу завершено!</h2>
+                    <p className="text-3xl leading-tight font-bold text-secondary">Вправу завершено!</p>
                     <p className="max-w-md text-lg leading-relaxed text-quiet">Ви правильно виконали всі завдання. Чудова робота!</p>
                     <div className="mt-3 flex w-full flex-col justify-center gap-4 sm:w-auto sm:flex-row">
                         <button type="button" onClick={resetProgress} className="inline-flex min-h-13 items-center justify-center gap-3 rounded-2xl bg-brand px-6 py-3 font-bold text-white hover:bg-brand-hover focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary">

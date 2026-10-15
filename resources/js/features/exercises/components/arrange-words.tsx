@@ -67,7 +67,7 @@ export default function ArrangeWords({ item, onCorrect }: Props) {
         <section className="space-y-7 rounded-3xl border border-border bg-white p-6 sm:p-9 lg:p-10">
             <div className="space-y-3">
                 <p className="font-medium text-quiet">Складіть речення</p>
-                <h2 className="text-[1.7rem] font-bold sm:text-[2rem]">Оберіть слова у правильному порядку</h2>
+                <p className="text-[1.7rem] leading-tight font-bold text-secondary sm:text-[2rem]">Оберіть слова у правильному порядку</p>
                 <p className="text-quiet">Натисніть на слово, щоб додати його до речення. Натисніть ще раз, щоб повернути назад.</p>
             </div>
             <div className={cn('min-h-32 space-y-3 rounded-2xl border-2 border-dashed p-5', isWrong ? 'border-error bg-error-soft' : 'border-control-border bg-canvas')}>

@@ -28,7 +28,7 @@ export default function Profile() {
     return (
         <div className="max-w-3xl space-y-6">
             <section className="rounded-3xl border border-border bg-white p-6 sm:p-8">
-                <h2 className="text-2xl font-bold">Особисті дані</h2>
+                <p className="text-2xl leading-tight font-bold text-secondary">Особисті дані</p>
                 <p className="mt-2 text-quiet">Тут можна змінити ім’я у своєму акаунті.</p>
                 <form onSubmit={saveProfile} className="mt-6 space-y-5">
                     <fieldset disabled={profile.processing} className="space-y-5">
@@ -38,14 +38,14 @@ export default function Profile() {
                             <p className="mt-1 wrap-anywhere font-medium text-secondary">{user.email}</p>
                         </div>
                         <div className="flex flex-wrap items-center gap-4">
-                            <button type="submit" disabled={profile.processing} className={saveButton}>{profile.processing ? 'Зберігаємо…' : 'Зберегти зміни'}</button>
+                            <button type="submit" disabled={profile.processing} className={saveButton}>Зберегти зміни</button>
                             {profile.recentlySuccessful && <p className="text-success">Ім’я збережено.</p>}
                         </div>
                     </fieldset>
                 </form>
             </section>
             <section className="rounded-3xl border border-border bg-white p-6 sm:p-8">
-                <h2 className="text-2xl font-bold">Зміна пароля</h2>
+                <p className="text-2xl leading-tight font-bold text-secondary">Зміна пароля</p>
                 <p className="mt-2 text-quiet">Введіть поточний пароль і виберіть новий.</p>
                 <form onSubmit={savePassword} className="mt-6 space-y-5">
                     <fieldset disabled={password.processing} className="space-y-5">
@@ -53,7 +53,7 @@ export default function Profile() {
                         <Input label="Новий пароль" name="password" type="password" autoComplete="new-password" value={password.data.password} onChange={event => password.setData('password', event.target.value)} error={password.errors.password} />
                         <Input label="Повторіть новий пароль" name="password_confirmation" type="password" autoComplete="new-password" value={password.data.password_confirmation} onChange={event => password.setData('password_confirmation', event.target.value)} error={password.errors.password_confirmation} />
                         <div className="flex flex-wrap items-center gap-4">
-                            <button type="submit" disabled={password.processing} className={saveButton}>{password.processing ? 'Зберігаємо…' : 'Змінити пароль'}</button>
+                            <button type="submit" disabled={password.processing} className={saveButton}>Змінити пароль</button>
                             {password.recentlySuccessful && <p className="text-success">Пароль змінено.</p>}
                         </div>
                     </fieldset>

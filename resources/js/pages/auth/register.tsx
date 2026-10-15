@@ -45,7 +45,7 @@ export default function RegisterForm() {
                         error={errors.password_confirmation}
                     />
 
-                    <Button type="submit" disabled={processing} variant="primary">Зареєструватися</Button>
+                    <Button type="submit" disabled={processing} variant="primary" className="w-full">Зареєструватися</Button>
                     <p className="border-t border-border pt-5 text-center text-quiet">
                         Уже маєте акаунт?{' '}
                         <Link href={login()} className="rounded-lg font-bold text-secondary hover:text-brand focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-secondary">Увійти</Link>

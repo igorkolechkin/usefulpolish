@@ -4,7 +4,7 @@ import { BookOpen, Plus, X } from 'lucide-react'
 import { useState, type FormEvent, type ReactNode } from 'react'
 import Input from '@/components/formElements/input'
 import Button from '@/components/ui/button'
-import { index, store, update, destroy } from '@/routes/dashboard/dictionary'
+import { cards, index, store, update, destroy } from '@/routes/dashboard/dictionary'
 
 type Entry = {
     id: number
@@ -217,10 +217,13 @@ export default function Dictionary({ entries, search }: Props) {
         <div className="space-y-6">
             <div className="flex flex-wrap items-center justify-between gap-4">
                 <p className="max-w-xl text-quiet">Ваші польські слова та переклади.</p>
-                <Button type="button" variant="primary" onClick={() => openEditor(null)}>
-                    <Plus className="size-5" />
-                    Додати слово
-                </Button>
+                <div className="flex flex-wrap gap-3">
+                    <Link href={cards()} className="button button--secondary">Картки</Link>
+                    <Button type="button" variant="primary" onClick={() => openEditor(null)}>
+                        <Plus className="size-5" />
+                        Додати слово
+                    </Button>
+                </div>
             </div>
             {message && (
                 <p className="rounded-xl bg-success-soft px-5 py-3 text-success">{message}</p>

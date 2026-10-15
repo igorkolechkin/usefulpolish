@@ -37,7 +37,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
                             error={errors.email}
                         />
 
-                        <Button type="submit" disabled={processing} variant="primary">
+                        <Button type="submit" disabled={processing} variant="primary" className="w-full">
                             Відправити посилання
                         </Button>
                     </>

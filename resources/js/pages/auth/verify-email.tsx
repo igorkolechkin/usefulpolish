@@ -41,7 +41,7 @@ export default function VerifyEmail({ status }: { status?: string }) {
 
                 <Form {...logout.form()}>
                     {({ processing }) => (
-                        <Button type="submit" disabled={processing} variant="secondary">
+                        <Button type="submit" disabled={processing} variant="secondary" className="w-full">
                             Вийти з акаунта
                         </Button>
                     )}

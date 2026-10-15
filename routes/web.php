@@ -12,6 +12,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 	Route::get('/exercises/{exercise:slug}', [ExerciseController::class, 'show'])->name('dashboard.exercises.show');
 
     Route::get('/dictionary', [VocabularyEntryController::class, 'index'])->name('dashboard.dictionary.index');
+    Route::get('/dictionary/cards', [VocabularyEntryController::class, 'cards'])->name('dashboard.dictionary.cards');
     Route::post('/dictionary', [VocabularyEntryController::class, 'store'])->name('dashboard.dictionary.store');
     Route::get('/dictionary/{entry}', [VocabularyEntryController::class, 'show'])->name('dashboard.dictionary.show');
     Route::patch('/dictionary/{entry}', [VocabularyEntryController::class, 'update'])->name('dashboard.dictionary.update');

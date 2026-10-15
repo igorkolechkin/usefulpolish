@@ -55,7 +55,7 @@ export default function LoginForm({ status }: { status?: string }) {
                         Запамʼятати мене
                     </label>
 
-                    <Button type="submit" disabled={processing} variant="primary">Увійти</Button>
+                    <Button type="submit" disabled={processing} variant="primary" className="w-full">Увійти</Button>
 
                     <Link
                         href={passwordRequest()}

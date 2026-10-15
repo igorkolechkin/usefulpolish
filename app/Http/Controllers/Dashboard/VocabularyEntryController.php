@@ -57,6 +57,22 @@ class VocabularyEntryController extends Controller
         return new VocabularyEntryResource($entry);
     }
 
+    public function cards(Request $request): InertiaResponse
+    {
+        Gate::authorize('viewAny', VocabularyEntry::class);
+
+        $entries = $request->user()->vocabularyEntries()
+            ->latest('id')
+            ->get(['id', 'word', 'translation'])
+            ->map(fn (VocabularyEntry $entry): array => [
+                'id' => $entry->id,
+                'word' => $entry->word,
+                'translation' => $entry->translation,
+            ]);
+
+        return Inertia::render('dashboard/dictionaryCards', ['entries' => $entries]);
+    }
+
     public function store(SaveVocabularyEntryRequest $request): VocabularyEntryResource|RedirectResponse
     {
         $entry = $request->user()->vocabularyEntries()->make($request->validated());

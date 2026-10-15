@@ -50,9 +50,6 @@ export default function Profile() {
                             <Button type="submit" variant="primary" disabled={profile.processing}>
                                 Зберегти зміни
                             </Button>
-                            {profile.recentlySuccessful && (
-                                <p className="text-success">Ім’я збережено.</p>
-                            )}
                         </div>
                     </fieldset>
                 </form>
@@ -101,9 +98,6 @@ export default function Profile() {
                             >
                                 Змінити пароль
                             </Button>
-                            {password.recentlySuccessful && (
-                                <p className="text-success">Пароль змінено.</p>
-                            )}
                         </div>
                     </fieldset>
                 </form>

@@ -39,7 +39,7 @@ export default function ResetPassword({ token, email }: { token: string; email: 
                         error={errors.password_confirmation}
                     />
 
-                    <Button type="submit" disabled={processing} variant="primary">
+                    <Button type="submit" disabled={processing} variant="primary" className="w-full">
                         Зберегти новий пароль
                     </Button>
                 </>

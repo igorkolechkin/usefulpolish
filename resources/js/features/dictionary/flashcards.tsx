@@ -37,7 +37,7 @@ export default function Flashcards({ entries }: { entries: DictionaryCardEntry[]
                             className="block h-80 w-full rounded-3xl text-center [perspective:1200px] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-secondary sm:h-96"
                         >
                             <span className={cn(
-                                'relative block size-full rounded-3xl transition-transform duration-200 [transform-style:preserve-3d] motion-reduce:transition-none',
+                                'relative block size-full rounded-3xl transition-transform duration-350 [transform-style:preserve-3d] motion-reduce:transition-none',
                                 isFlipped ? '[transform:rotateY(180deg)]' : '[transform:rotateY(0deg)]',
                             )}>
                                 <span className="absolute inset-0 flex items-center justify-center rounded-3xl border border-border bg-white p-8 shadow-sm [backface-visibility:hidden]">

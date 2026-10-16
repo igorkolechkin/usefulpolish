@@ -2,6 +2,7 @@ import { Link } from '@inertiajs/react'
 import { ArrowLeft, ArrowRight, BookOpen } from 'lucide-react'
 import { useState } from 'react'
 import Button from '@/components/ui/button'
+import SpeechButton from '@/components/ui/speechButton'
 import { cn } from '@/lib/utils'
 import { index } from '@/routes/dashboard/dictionary'
 
@@ -23,43 +24,72 @@ export default function Flashcards({ entries }: { entries: DictionaryCardEntry[]
 
     return (
         <div className="space-y-7">
-            <Link href={index()} className="inline-flex min-h-12 items-center gap-3 rounded-lg font-medium text-quiet hover:text-brand focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary">
+            <Link
+                href={index()}
+                className="inline-flex min-h-12 items-center gap-3 rounded-lg font-medium text-quiet hover:text-brand focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-secondary"
+            >
                 <ArrowLeft className="size-5" /> До словника
             </Link>
 
             <div className="mx-auto max-w-3xl space-y-7">
                 {currentEntry ? (
                     <>
-                        <button
+                        <div
                             key={currentEntry.id}
-                            type="button"
-                            onClick={() => setIsFlipped(flipped => !flipped)}
-                            className="block h-80 w-full rounded-3xl text-center [perspective:1200px] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-secondary sm:h-96"
+                            className="h-80 w-full [perspective:1200px] sm:h-96"
                         >
-                            <span className={cn(
-                                'relative block size-full rounded-3xl transition-transform duration-350 [transform-style:preserve-3d] motion-reduce:transition-none',
-                                isFlipped ? '[transform:rotateY(180deg)]' : '[transform:rotateY(0deg)]',
-                            )}>
-                                <span className="absolute inset-0 flex items-center justify-center rounded-3xl border border-border bg-white p-8 shadow-sm [backface-visibility:hidden]">
-                                    <span className="text-3xl font-bold text-secondary sm:text-4xl">
-                                        {currentEntry.word}
-                                    </span>
-                                </span>
-                                <span className="absolute inset-0 flex items-center justify-center rounded-3xl border border-secondary bg-secondary p-8 text-white shadow-sm [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                            <div
+                                className={cn(
+                                    'relative size-full rounded-3xl transition-transform duration-350 [transform-style:preserve-3d] motion-reduce:transition-none',
+                                    isFlipped
+                                        ? '[transform:rotateY(180deg)]'
+                                        : '[transform:rotateY(0deg)]',
+                                )}
+                            >
+                                <div
+                                    inert={isFlipped}
+                                    className="absolute inset-0 flex items-center justify-center rounded-3xl border border-border bg-white p-8 shadow-sm [backface-visibility:hidden]"
+                                >
+                                    <button
+                                        type="button"
+                                        onClick={() => setIsFlipped(true)}
+                                        className="absolute inset-0 rounded-3xl focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-secondary"
+                                    />
+                                    <div className="pointer-events-none relative flex items-center justify-center gap-3">
+                                        <span className="text-center text-3xl font-bold text-secondary sm:text-4xl">
+                                            {currentEntry.word}
+                                        </span>
+                                        <SpeechButton />
+                                    </div>
+                                </div>
+                                <button
+                                    type="button"
+                                    inert={!isFlipped}
+                                    onClick={() => setIsFlipped(false)}
+                                    className="absolute inset-0 flex [transform:rotateY(180deg)] items-center justify-center rounded-3xl border border-secondary bg-secondary p-8 text-center text-white shadow-sm [backface-visibility:hidden] focus-visible:outline-3 focus-visible:outline-offset-4 focus-visible:outline-secondary"
+                                >
                                     <span className="text-3xl font-bold sm:text-4xl">
                                         {currentEntry.translation}
                                     </span>
-                                </span>
-                            </span>
-                        </button>
+                                </button>
+                            </div>
+                        </div>
 
-                        <p className="text-center mb-2">Натисніть, щоб повернути слово</p>
+                        <p className="mb-2 text-center">Натисніть, щоб повернути слово</p>
 
                         <div className="flex flex-wrap justify-between gap-3">
-                            <Button variant="secondary" disabled={currentIndex === 0} onClick={() => showCard(currentIndex - 1)}>
+                            <Button
+                                variant="secondary"
+                                disabled={currentIndex === 0}
+                                onClick={() => showCard(currentIndex - 1)}
+                            >
                                 <ArrowLeft className="size-5" /> Попередня
                             </Button>
-                            <Button variant="secondary" disabled={currentIndex === entries.length - 1} onClick={() => showCard(currentIndex + 1)}>
+                            <Button
+                                variant="secondary"
+                                disabled={currentIndex === entries.length - 1}
+                                onClick={() => showCard(currentIndex + 1)}
+                            >
                                 Наступна <ArrowRight className="size-5" />
                             </Button>
                         </div>
@@ -67,9 +97,15 @@ export default function Flashcards({ entries }: { entries: DictionaryCardEntry[]
                 ) : (
                     <div className="flex flex-col items-center gap-4 rounded-3xl border border-border bg-white px-6 py-14 text-center">
                         <BookOpen className="size-10 text-secondary" strokeWidth={1.5} />
-                        <p className="text-2xl leading-tight font-bold text-secondary">У словнику ще немає слів</p>
-                        <p className="max-w-md text-quiet">Додайте слово та його переклад, щоб почати заняття з картками.</p>
-                        <Link href={index()} className="button button--primary mt-2">До словника</Link>
+                        <p className="text-2xl leading-tight font-bold text-secondary">
+                            У словнику ще немає слів
+                        </p>
+                        <p className="max-w-md text-quiet">
+                            Додайте слово та його переклад, щоб почати заняття з картками.
+                        </p>
+                        <Link href={index()} className="button button--primary mt-2">
+                            До словника
+                        </Link>
                     </div>
                 )}
             </div>
